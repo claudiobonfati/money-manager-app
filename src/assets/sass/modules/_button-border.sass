@@ -1,0 +1,29 @@
+// ==========================================================================
+// MODULES > BUTTON BORDER
+// BOOTSTRAP.SCSS REQUIRED
+// ==========================================================================
+
+[class*="btn-border"]
+  display: inline-block
+  padding: 10px 15px
+  border-radius: 15px
+  border: 3px solid #505050
+  text-align: center
+  @include transition(all 0.2s ease-out)
+
+  &:focus
+    box-shadow: 0 0 0 3px rgba(#505050, .2)
+  
+  // Transparent
+  &[class*="btn-border-transparent"]
+    border-color: transparent
+
+  // White
+  &[class*="btn-border-white"]
+    border-color: #FFF
+
+  @each $color in $color-config
+    &[class*="btn-border-#{nth($color, 1)}"]
+      border-color: nth($color, 2)
+      &:focus
+        box-shadow: 0 0 0 3px rgba(nth($color, 2), .2)

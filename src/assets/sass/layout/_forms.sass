@@ -1,0 +1,90 @@
+// ==========================================================================
+// LAYOUT > FORMS
+// ==========================================================================
+
+button
+  font-size: 14px
+  cursor: pointer
+  background-color: transparent
+  &:focus
+    box-shadow: 0
+    outline: none
+
+[class*="field-theme-01"]
+  position: relative
+
+  input
+    position: relative
+    display: block
+    width: 100%
+    min-height: 40px
+    padding-left: 25px
+    background-color: transparent
+    border: 0
+    border-radius: 0
+    border-bottom: 1px solid #FFFFFF
+    font-size: 14px
+    color: #FFFFFF
+    @include transition(all .1s ease-out)
+
+    &:focus
+      outline: none
+      box-shadow: 0 0.3rem 0 0rem rgba(#FFFFFF, .15)
+
+    &::placeholder
+      color: #FFFFFF
+      opacity: .5
+    &:-ms-input-placeholder
+      color: #FFFFFF
+      opacity: .5
+    &::-ms-input-placeholder
+      color: #FFFFFF
+      opacity: .5
+
+  .icon-left,
+  .icon-right
+    position: absolute
+    top: 50%
+    margin-top: -8px
+    font-size: 16px
+    color: #FFFFFF
+
+  .icon-left
+    left: 0
+
+  .icon-right
+    right: 0
+    transform: scale(0)
+    @include transition(all .2s ease-out)
+  
+  &.is-invalid
+    input
+      padding-right: 25px
+    .icon-right
+      transform: scale(1)
+
+  @each $color in $color-config
+    &[class*="field-theme-01-#{nth($color, 1)}"]
+      input 
+        border-bottom: 1px solid rgba(nth($color, 2), .5)
+        color: nth($color, 2)
+        &::placeholder
+          color: nth($color, 2)
+        &:-ms-input-placeholder
+          color: nth($color, 2)
+        &::-ms-input-placeholder
+          color: nth($color, 2)
+      &:focus
+        box-shadow: 0 0.3rem 0 0rem rgba(nth($color, 2), .15)
+      .icon-left,
+      .icon-right
+          color: nth($color, 2)
+
+.number-keyboard
+  -moz-appearance: textfield
+
+.number-keyboard::-webkit-inner-spin-button, 
+.number-keyboard::-webkit-outer-spin-button
+  -webkit-appearance: none
+  margin: 0
+

@@ -1,0 +1,88 @@
+<div id="mm-content-wrapper" class="full-page">
+  <div class="w-100 h-100 px-3">
+    <div class="w-100 h-100" *ngIf="passwordVisible" [@panelInOut]>
+      <div class="container h-100">
+        <div class="row h-100 justify-content-center">
+          <div class="col-12 text-center pt-5">
+            <a href="javascript:void(0);" title="Register" routerLink="/">
+              <img src="assets/images/logo-money-manager.svg" alt="{{ env.name }}" id="logo-mm" class="mb-2">
+            </a>
+            <p class="lay-color-aluminium mb-5">Tell me your email</p>
+            <form [formGroup]="registerForm" (ngSubmit)="storeInfo()">
+              <div class="w-100 px-3 mb-5">
+                <div class="field-theme-01-athens-gray mb-5" 
+                  [ngClass]="{ 'is-invalid': registerSent && registerField.email.errors }">
+                  <span class="icomoon-mail icon-left"></span>
+                  <input type="text" 
+                  placeholder="Email" 
+                  formControlName="email" >
+                  <span class="icomoon-warning icon-right"></span>
+                </div>
+              </div>
+              <div class="w-100">
+                <button class="btn-border-athens-gray w-100 font-weight-bold lay-color-athens-gray">
+                  Next
+                </button>
+              </div>
+            </form>
+          </div>
+          <div class="col-12 text-center align-self-end py-3">
+            <a href="javascript:void(0);" title="Sign in" routerLink="/register" class="font-weight-bold lay-color-athens-gray text-decoration-none p-2">
+              New here? Register!
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="w-100 h-100" *ngIf="registerVisible" [@panelInOut]>
+      <div class="container h-100">
+        <div class="row h-100 justify-content-center">
+          <div class="col-12 text-center pt-5">
+            <div class="profile-pick">
+              <img src="assets/images/profile.png" alt="{{ env.name }}">
+            </div>
+            <strong class="lay-color-athens-gray mb-5 d-block font-lg">
+              Donna Smith
+            </strong>
+            <form [formGroup]="passwordForm" (ngSubmit)="send()">
+              <div class="w-100 px-3">
+                <div class="field-theme-01-athens-gray mb-3"
+                  [ngClass]="{ 'is-invalid': passwordSent && passwordField.password.errors }">
+                  <span class="icomoon-lock-closed icon-left"></span>
+                  <input type="password" 
+                  placeholder="Password"
+                  pattern="[0-9]*"
+                  inputmode="numeric" 
+                  formControlName="password" >
+                  <span class="icomoon-warning icon-right"></span>
+                </div>
+              </div>
+              <div class="w-100">
+                <div class="row">
+                  <div class="col-4 py-2" *ngFor="let item of passButtons; index as i;">
+                    <a href="javascript:void(0);" (click)="passAdd(item.opt1, item.opt2)" title="1 or 2" class="btn-border-athens-gray lay-bg-athens-gray w-100 font-weight-bold lay-color-outer-space text-decoration-none">
+                      {{ item.opt1 }} or {{ item.opt2 }}
+                    </a>
+                  </div>
+                  <div class="col-4 py-2">
+                    <a href="javascript:void(0);" (click)="passRemove()" title="backspace" class="btn-border-athens-gray lay-bg-athens-gray w-100 font-weight-bold lay-color-outer-space text-decoration-none">
+                      <span class="icomoon-backspace icon-25"></span>
+                    </a>
+                  </div>
+                </div>
+                <button class="btn-border-athens-gray w-100 font-weight-bold lay-color-outer-space lay-bg-athens-gray my-2">
+                  Done!
+                </button>
+              </div>
+            </form>
+          </div>
+          <div class="col-12 text-center align-self-end py-3">
+            <a href="javascript:void(0);" title="Sign in" routerLink="/register" class="font-weight-bold lay-color-athens-gray text-decoration-none p-2">
+              I’m not Donna Smith
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

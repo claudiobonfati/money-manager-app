@@ -1,0 +1,19 @@
+// ==========================================================================
+// Theme Custom Variables
+// ====        ======================================================================
+
+$color-config:( "outer-space":   #2E3C40, 
+                "comet":         #586479,
+                "aluminium":     #ABB1BB,
+                "mercury":       #E5E5E5,
+                "athens-gray":   #F5F6F8
+);
+
+// Some predefined font-sizes. Each value is for a specific screen size (bootstrap), see below.
+// To apply the font-size, add the class "font-[fontsizename]" to HTML element.
+//                  NAME   XL     LG     MD    SM    XS
+$fontsize-config:   "lg"   20px   20px   20px  20px  20px, 
+                    "md"   15px   15px   15px  15px  15px,
+                    "sm"   13px   13px   13px  13px  13px;
+
+$fixed-vh: 555px;

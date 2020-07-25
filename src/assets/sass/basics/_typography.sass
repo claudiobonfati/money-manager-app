@@ -1,0 +1,59 @@
+// ==========================================================================
+// BASICS > TYPOGRAPHY
+// ==========================================================================
+
+h1, h2, h3, h4, h5, h6
+  font-weight: bold
+
+p
+  margin: 0 0 20px 0
+
+em
+  font-style: italic
+
+strong
+  font-weight: bold
+
+hr
+  border: solid #ddd
+  border-width: 1px 0 0
+  clear: both
+  margin: 10px 0 30px
+  height: 0
+
+@each $color in $color-config
+  .lay-color-#{nth($color, 1)}, 
+  .lay-color-#{nth($color, 1)}:hover, 
+  .lay-color-#{nth($color, 1)}:active , 
+  .lay-color-#{nth($color, 1)}:focus , 
+  .lay-color-#{nth($color, 1)}:visited,
+  .lay-color-#{nth($color, 1)} *, 
+  .lay-color-#{nth($color, 1)} *:hover, 
+  .lay-color-#{nth($color, 1)} *:active , 
+  .lay-color-#{nth($color, 1)} *:focus , 
+  .lay-color-#{nth($color, 1)} *:visited
+    color: nth($color, 2)
+
+@each $value in $fontsize-config 
+  .font-#{nth($value, 1)}
+    font-size: nth($value, 2)
+
++media-breakpoint-down(xl)
+  @each $value in $fontsize-config 
+    .font-#{nth($value, 1)}
+      font-size: nth($value, 3)
+
++media-breakpoint-down(lg)
+  @each $value in $fontsize-config 
+    .font-#{nth($value, 1)}
+      font-size: nth($value, 4)
+
++media-breakpoint-down(md)
+  @each $value in $fontsize-config 
+    .font-#{nth($value, 1)}
+      font-size: nth($value, 5)
+
++media-breakpoint-down(sm)
+  @each $value in $fontsize-config 
+    .font-#{nth($value, 1)}
+      font-size: nth($value, 6)

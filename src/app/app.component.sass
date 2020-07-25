@@ -1,0 +1,32 @@
+.mm-main-wrapper
+  width: 100%
+  height: 100%
+  margin: 0 auto
+  position: relative
+  background-color: #FFFFFF
+
+#mm-wrapper-router
+  width: 100%
+  height: 100%
+  margin: 0 auto
+  position: relative
+  #mm-wrapper-inner
+    display: block
+    position: relative
+    width: 100%
+    height: 100%
+    overflow: hidden
+  &.centralized
+    position: absolute
+    left: 50%
+    top: 50%
+    width: 312px
+    height: 555px
+    margin-top: -277px
+    margin-left: -156px
+    #mm-wrapper-inner
+      border-radius: 30px
+      border: 5px solid #000
+      -webkit-box-shadow: 20px 20px 20px -2px rgba(0, 0, 0, .2)
+      -moz-box-shadow: 20px 20px 20px -2px rgba(0, 0, 0, .2)
+      box-shadow: 20px 20px 20px -2px rgba(0, 0, 0, .2)

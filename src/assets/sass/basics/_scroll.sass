@@ -1,0 +1,28 @@
+// ==========================================================================
+// BASICS > SCROLL
+// ==========================================================================
+
+*
+  -webkit-overflow-scrolling: touch
+
+*::-webkit-scrollbar
+  width: 5px
+
+*::-webkit-scrollbar-track
+  background-color: transparent
+
+*::-webkit-scrollbar-thumb
+  background-color: rgba(black, .2)
+  border-radius: 15px
+  outline: 0
+
+.overflow-initial
+  overflow: initial !important
+
+.overflow-scroll
+  overflow: scroll !important
+
+.hide-scrollbar
+  -ms-overflow-style: none
+  &::-webkit-scrollbar
+    display: none

@@ -1,0 +1,56 @@
+// ==========================================================================
+// LAYOUT > MAIN
+// ==========================================================================
+
+#mm-wrapper-inner
+  border-color: map-get($color-config, "outer-space") !important
+
+#mm-bg-elements
+  #bg-up
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background-color: map-get($color-config, "outer-space")
+    background-repeat: no-repeat
+    background-position: center bottom 0px
+    background-size: cover
+    transition: all .5s ease-out
+  &.page-welcome
+    #bg-up
+      height: 100%
+
+#mm-content-wrapper
+  width: 100%
+  height: 100%
+
+#logo-mm
+  max-width: 70%
+
+*:focus
+  -webkit-tap-highlight-color: transparent
+  outline: none
+  -ms-touch-action: manipulation
+  touch-action: manipulation
+
+.profile-pick
+  display: inline-block
+  width: 90px
+  height: 90px
+  border-radius: 35%
+  position: relative
+  overflow: hidden
+  img 
+    position: absolute
+    width: 100%
+    height: 100%
+    top: 0
+    left: 0
+    object-fit: cover
+
+.icon-25
+  font-size: 25px
+  line-height: 10px
+  vertical-align: middle
+
