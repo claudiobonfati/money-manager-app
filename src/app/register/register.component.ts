@@ -75,7 +75,7 @@ export class RegisterComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    setTimeout(() => this.inputName.nativeElement.focus());
+    // setTimeout(() => this.inputName.nativeElement.focus());
   }
 
   get registerField() {

@@ -2,17 +2,18 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { AppRoutingModule } from './app-routing.module';
 import { WelcomeModule } from './welcome/welcome.module';
 import { SigninModule } from './signin/signin.module';
 import { RegisterModule } from './register/register.module';
 import { UsersModule } from './users/users.module';
 
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { SigninComponent } from './signin/signin.component';
 import { RegisterComponent } from './register/register.component';
+import { MenuComponent } from './core/components/menu/menu.component';
 
 import { environment } from '../environments/environment';
 
@@ -41,7 +42,7 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    WelcomeComponent
+    MenuComponent
   ],
   imports: [
     BrowserModule,

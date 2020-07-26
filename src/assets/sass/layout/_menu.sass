@@ -1,0 +1,173 @@
+// ==========================================================================
+// LAYOUT > MENU
+// ==========================================================================
+
+.menu-wrapper
+  position: absolute
+  width: 100%
+  height: 60px
+  bottom: 0
+  left: 0
+  z-index: 15
+  .menu
+    width: 100%
+    padding: 0 40px
+    margin: 0
+    list-style: none
+    display: -ms-flexbox
+    display: -webkit-flex
+    display: flex
+    -webkit-flex-direction: row
+    -ms-flex-direction: row
+    flex-direction: row
+    -webkit-flex-wrap: nowrap
+    -ms-flex-wrap: nowrap
+    flex-wrap: nowrap
+    -webkit-justify-content: center
+    -ms-flex-pack: center
+    justify-content: center
+    -webkit-align-content: stretch
+    -ms-flex-line-pack: stretch
+    align-content: stretch
+    -webkit-align-items: center
+    -ms-flex-align: center
+    align-items: center
+    li
+      -webkit-order: 0
+      -ms-flex-order: 0
+      order: 0
+      -webkit-flex: 1 1 auto
+      -ms-flex: 1 1 auto
+      flex: 1 1 auto
+      -webkit-align-self: auto
+      -ms-flex-item-align: auto
+      align-self: auto
+      height: 60px
+      position: relative
+      display: -ms-flexbox
+      display: -webkit-flex
+      display: flex
+      -webkit-flex-direction: row
+      -ms-flex-direction: row
+      flex-direction: row
+      -webkit-flex-wrap: nowrap
+      -ms-flex-wrap: nowrap
+      flex-wrap: nowrap
+      -webkit-justify-content: center
+      -ms-flex-pack: center
+      justify-content: center
+      -webkit-align-content: stretch
+      -ms-flex-line-pack: stretch
+      align-content: stretch
+      -webkit-align-items: center
+      -ms-flex-align: center
+      align-items: center
+      .eff-gooey
+        position: absolute
+        width: 100%
+        height: calc(50% + 5px)
+        top: -5px
+        left: 0
+        overflow: hidden
+        filter: blur(5px) contrast(20)
+        background: #000000
+        .eff-top
+          position: absolute
+          display: block
+          background-color: map-get($color-config, "athens-gray")
+          width: 100%
+          height: 5px 
+          top: 0
+          left: 0
+        &::after,
+        &::before
+          position: absolute
+          display: block
+          content: ""
+          background-color: map-get($color-config, "athens-gray")
+          border-radius: 50%
+          left: 50%
+          @include transition(all 0.2s ease-out)
+        &::after
+          width: 20px
+          height: 20px
+          top: -20px
+          margin-left: -10px
+          border-radius: 0
+          transform: rotate(45deg)
+        &::before
+          width: 26px
+          height: 26px
+          margin-left: -13px
+          bottom: -15px
+          transform: rotate(45deg)
+
+      &.active
+        .eff-gooey
+          &::after
+            top: -10px
+          &::before
+            bottom: -3px
+
+      a
+        position: relative
+        padding: 0
+        width: 40px
+        height: 40px
+        text-align: center
+        font-size: 20px
+        border-radius: 50%
+        background-color: map-get($color-config, "athens-gray")
+        color: map-get($color-config, "outer-space")
+        transition: all .2s ease
+        text-decoration: none
+        display: -ms-flexbox
+        display: -webkit-flex
+        display: flex
+        -webkit-flex-direction: row
+        -ms-flex-direction: row
+        flex-direction: row
+        -webkit-flex-wrap: nowrap
+        -ms-flex-wrap: nowrap
+        flex-wrap: nowrap
+        -webkit-justify-content: center
+        -ms-flex-pack: center
+        justify-content: center
+        -webkit-align-content: stretch
+        -ms-flex-line-pack: stretch
+        align-content: stretch
+        -webkit-align-items: center
+        -ms-flex-align: center
+        align-items: center
+        &:hover,
+        &:active,
+        &:focus,
+        &:visited
+          text-decoration: none
+        &::before
+          content: " "
+          position: absolute
+          width: 100%
+          height: 4px
+          left: 0
+          bottom: 0
+          background-color: map-get($color-config, "red")
+          opacity: 0
+          transition: all .2s ease
+        &:active
+          transform: scale(.9)
+        [id*="icomoon"]
+          -webkit-order: 0
+          -ms-flex-order: 0
+          order: 0
+          -webkit-flex: 0 1 auto
+          -ms-flex: 0 1 auto
+          flex: 0 1 auto
+          -webkit-align-self: auto
+          -ms-flex-item-align: auto
+          align-self: auto
+        &.active,
+        &.active *
+          color: map-get($color-config, "red") !important
+          &::before
+            opacity: 1

@@ -6,7 +6,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [RegisterComponent],
+  declarations: [
+    RegisterComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
