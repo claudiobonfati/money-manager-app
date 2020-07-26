@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { WelcomeModule } from './welcome/welcome.module';
 import { SigninModule } from './signin/signin.module';
 import { RegisterModule } from './register/register.module';
+import { UsersModule } from './users/users.module';
 
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { AppRoutingModule } from './app-routing.module';
@@ -50,6 +51,7 @@ const appRoutes: Routes = [
     WelcomeModule,
     SigninModule,
     RegisterModule,
+    UsersModule
   ],
   providers: [],
   bootstrap: [AppComponent]
