@@ -9,6 +9,12 @@
   bottom: 0
   left: 0
   z-index: 15
+  svg 
+    width: 0
+    height: 0
+    position: absolute
+    left: 0
+    top: 0
   .menu
     width: 100%
     padding: 0 40px
@@ -68,46 +74,45 @@
         height: calc(50% + 5px)
         top: -5px
         left: 0
-        overflow: hidden
-        filter: blur(5px) contrast(20)
-        background: #000000
+        overflow: visible
+        filter: url(#goo)
         .eff-top
           position: absolute
           display: block
           background-color: map-get($color-config, "athens-gray")
-          width: 100%
-          height: 5px 
-          top: 0
-          left: 0
+          width: 150%
+          height: 15px 
+          top: -15px
+          left: -25%
+          @include transition(all 0.2s ease-out)
         &::after,
         &::before
           position: absolute
           display: block
           content: ""
           background-color: map-get($color-config, "athens-gray")
-          border-radius: 50%
           left: 50%
           @include transition(all 0.2s ease-out)
         &::after
-          width: 20px
-          height: 20px
-          top: -20px
-          margin-left: -10px
-          border-radius: 0
-          transform: rotate(45deg)
+          width: 100%
+          height: 15px
+          top: -60px
+          left: 0
+          transform: rotate(90deg)
         &::before
-          width: 26px
-          height: 26px
-          margin-left: -13px
-          bottom: -15px
-          transform: rotate(45deg)
+          width: 34px
+          height: 34px
+          margin-left: -17px
+          bottom: -17px
+          border-radius: 50%
+          transform: scale(.1)
 
       &.active
         .eff-gooey
           &::after
-            top: -10px
+            transform: translateY(25px) rotate(90deg)
           &::before
-            bottom: -3px
+            transform: scale(1)
 
       a
         position: relative
