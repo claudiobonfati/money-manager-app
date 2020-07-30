@@ -1,5 +1,5 @@
 import { Component, HostListener } from '@angular/core';
-import { HelperService } from './core/helper.service';
+import { HelperService } from './core/services/helper.service';
 import { environment } from '../environments/environment';
 import { 
   RouterOutlet, 

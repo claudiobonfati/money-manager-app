@@ -1,7 +1,8 @@
 import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HelperService } from 'src/app/core/helper.service';
+import { HttpService } from 'src/app/core/services/http.service';
+import { HelperService } from 'src/app/core/services/helper.service';
 import { trigger, style, animate, transition } from '@angular/animations';
 
 @Component({
@@ -33,7 +34,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     public formBuilder: FormBuilder,
-    public helperService: HelperService
+    public helperService: HelperService,
+    public httpService: HttpService
   ) { }
 
   ngOnInit(): void {

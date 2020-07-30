@@ -4,22 +4,22 @@
 
 #mm-wrapper-inner
   border-color: map-get($color-config, "outer-space") !important
+  background-color: map-get($color-config, "outer-space")
 
 #mm-bg-elements
-  #bg-up
+  #bg-up  
     position: absolute
     top: 0
     left: 0
     width: 100%
-    height: 100%
-    background-color: map-get($color-config, "outer-space")
-    background-repeat: no-repeat
-    background-position: center bottom 0px
-    background-size: cover
-    transition: all .5s ease-out
-  &.page-welcome
+    height: calc(100% - 60px)
+    background-color: #FAFBFC
+    border-radius: 0 0 15px 15px
+    @include transition(all 0.2s ease-out)
+    transform: translateY(-100%)
+  &.page-dashboard
     #bg-up
-      height: 100%
+      transform: translateY(0%)
 
 #mm-content-wrapper
   width: 100%

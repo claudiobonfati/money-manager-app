@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   name: "MoneyManager",
-  api_url: "",
+  api_url: "http://localhost:3000/",
 };
 
 /*

@@ -1,8 +1,10 @@
 import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HelperService } from 'src/app/core/helper.service';
+import { HelperService } from 'src/app/core/services/helper.service';
 import { trigger, style, animate, transition } from '@angular/animations';
+import { environment } from 'src/environments/environment';
+import { HttpService } from 'src/app/core/services/http.service'
 
 @Component({
   selector: 'app-signin',
@@ -22,32 +24,25 @@ import { trigger, style, animate, transition } from '@angular/animations';
 })
 export class SigninComponent implements OnInit {
   public env = environment;
-  public registerSent = false;
+  public currentStep = '';
+  public emailSent = false;
   public passwordSent = false;
-  public registerForm: FormGroup;
+  public emailForm: FormGroup;
   public passwordForm: FormGroup;
-  public registerVisible = true;
-  public passwordVisible = false;
   public password = [];
   public passButtons = [];
+  public currentUser = null;
 
   // @ViewChild('inputEmail') inputEmail:ElementRef;
 
   constructor(
     public formBuilder: FormBuilder,
-    public helperService: HelperService
+    public helperService: HelperService,
+    public httpService: HttpService
   ) { }
 
   ngOnInit(): void {
-    this.registerForm = this.formBuilder.group({
-      name: [
-        "", 
-        [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(250)
-        ]
-      ],
+    this.emailForm = this.formBuilder.group({
       email: [
         "", 
         [
@@ -56,6 +51,7 @@ export class SigninComponent implements OnInit {
         ]
       ]
     });
+
     this.passwordForm = this.formBuilder.group({
       password: [
         "", 
@@ -88,14 +84,22 @@ export class SigninComponent implements OnInit {
         opt2: numbers[9],
       }
     ];
+
+    let user = localStorage.getItem('currentUserPresentation');
+    if (user) {
+      this.currentUser = JSON.parse(user);
+      this.currentStep = 'password';
+    } else {
+      this.currentStep = 'email';
+    }
   }
 
   ngAfterViewInit() {
     // setTimeout(() => this.inputEmail.nativeElement.focus());
   }
 
-  get registerField() {
-    return this.registerForm.controls;
+  get emailField() {
+    return this.emailForm.controls;
   }
 
   get passwordField() {
@@ -103,34 +107,45 @@ export class SigninComponent implements OnInit {
   }
 
   passAdd(value1, value2) {
-    let key = [value1, value2]
-    this.password.push(key)
+    let key = [value1, value2];
+    this.password.push(key);
 
     let currValue = this.passwordForm.get('password').value;
     this.passwordForm.get('password').setValue(currValue + "0");
-
-    console.log(this.password)
   }
 
   passRemove() {
-    this.password.pop()
+    this.password.pop();
+
     let currValue = this.passwordForm.get('password').value;
     let newValue = currValue.substring(0, currValue.length - 1);
-
     this.passwordForm.get('password').setValue(newValue);
   }
 
-  storeInfo() {
-    this.registerSent = true;
+  getPresentation(): void {
+    this.emailSent = true;
 
-    this.registerVisible = false;
-    setTimeout(() => {
-      this.passwordVisible = true;
-    }, 300)
+    this.httpService.buildUrl('users/presentation')
+    .getPresentation(this.emailForm.value).subscribe(
+      res => {
+        localStorage.setItem('currentUserPresentation', JSON.stringify(res));
+        this.currentUser = res;
+        this.currentStep = 'password';
+      }, error => {
+        console.log(error)
+      }
+    )
   }
 
-  send() {
-    this.passwordSent = true;
-    console.log('sent')
+  removeCurrentUser(): void {
+    localStorage.clear();
+
+    this.currentStep = 'email'
+    this.emailForm.get('email').setValue("");
+    this.currentUser = null;
+  }
+
+  login(): void {
+    
   }
 }
