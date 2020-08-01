@@ -28,9 +28,26 @@ export class HttpService {
     return this;
   }
 
-  public getPresentation(email: any): Observable<any> {
-    return this.http.post<any>(this.url, email)
+  public getPresentation(email: object): Observable<any> {
+    return this.http.post<object>(this.url, email);
   }
 
-  
+  public login(email: string, password: string): Observable<any> {
+    let content = {
+      email,
+      password
+    }
+
+    return this.http.post<any>(this.url, content);
+  }
+
+  public loginEasy(_id: string, email: string, password: Array<any>): Observable<any> {
+    let content = {
+      _id,
+      email,
+      password
+    }
+
+    return this.http.post<any>(this.url, content);
+  }
 }
