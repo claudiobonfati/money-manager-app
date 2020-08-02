@@ -7,9 +7,9 @@ import { environment } from 'src/environments/environment';
 import { HttpService } from 'src/app/core/services/http.service'
 
 @Component({
-  selector: 'app-signin',
-  templateUrl: './signin.component.html',
-  styleUrls: ['./signin.component.sass'],
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.sass'],
   animations: [
     trigger('panelInOut', [
       transition('void => *', [
@@ -22,7 +22,7 @@ import { HttpService } from 'src/app/core/services/http.service'
     ])
   ]
 })
-export class SigninComponent implements OnInit {
+export class LoginComponent implements OnInit {
   public env = environment;
   public currentUser = null;
   public currentStep = '';
@@ -138,8 +138,8 @@ export class SigninComponent implements OnInit {
     .subscribe(
       res => {
         // Add logic here
-        // this.currentUser = res;
-        // this.currentStep = 'password';
+        this.currentUser = res;
+        this.currentStep = 'password';
       }, (error: HttpErrorResponse) => {
         if (error.status === 404) {
           this.emailErrorMsg = 'Email not registered!';

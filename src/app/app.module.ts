@@ -6,13 +6,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { AppRoutingModule } from './app-routing.module';
 import { WelcomeModule } from './welcome/welcome.module';
-import { SigninModule } from './signin/signin.module';
+import { LoginModule } from './login/login.module';
 import { RegisterModule } from './register/register.module';
 import { UsersModule } from './users/users.module';
 
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
-import { SigninComponent } from './signin/signin.component';
+import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { MenuComponent } from './core/components/menu/menu.component';
 
@@ -26,10 +26,10 @@ const appRoutes: Routes = [
       class: "page-welcome"
     }
   }, { 
-    path: 'signin', 
-    component: SigninComponent,
+    path: 'login', 
+    component: LoginComponent,
     data: {
-      class: "page-signin"
+      class: "page-login"
     }
   }, { 
     path: 'register', 
@@ -52,7 +52,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     WelcomeModule,
-    SigninModule,
+    LoginModule,
     RegisterModule,
     UsersModule
   ],

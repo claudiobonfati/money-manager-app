@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SigninComponent } from './signin.component';
+import { LoginComponent } from './login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
-    SigninComponent
+    LoginComponent
   ],
   imports: [
     CommonModule,
@@ -17,4 +17,4 @@ import { RouterModule } from '@angular/router';
     RouterModule
   ]
 })
-export class SigninModule { }
+export class LoginModule { }
