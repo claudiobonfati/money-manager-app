@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HelperService } from 'src/app/core/services/helper.service';
@@ -24,16 +24,20 @@ import { HttpService } from 'src/app/core/services/http.service'
 })
 export class SigninComponent implements OnInit {
   public env = environment;
-  public currentStep = '';
-  public emailSent = false;
-  public passwordSent = false;
-  public emailForm: FormGroup;
-  public passwordForm: FormGroup;
-  public password = [];
-  public passButtons = [];
   public currentUser = null;
+  public currentStep = '';
+  public loginMode = '';
 
-  // @ViewChild('inputEmail') inputEmail:ElementRef;
+  public emailForm: FormGroup;
+  public emailSent = false;
+  public emailErrorMsg = null;
+  public emailAnimateShake = false;
+
+  public passwordForm: FormGroup;
+  public passwordSent = false;
+  public passwordAnimateShake = false;
+  public passButtons = [];
+  public password = [];
 
   constructor(
     public formBuilder: FormBuilder,
@@ -42,6 +46,7 @@ export class SigninComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // Initiate forms
     this.emailForm = this.formBuilder.group({
       email: [
         "", 
@@ -51,7 +56,6 @@ export class SigninComponent implements OnInit {
         ]
       ]
     });
-
     this.passwordForm = this.formBuilder.group({
       password: [
         "", 
@@ -63,9 +67,9 @@ export class SigninComponent implements OnInit {
       ]
     });
 
+    // Generate random buttons for easy login
     let numbers = [0,1,2,3,4,5,6,7,8,9];
     this.helperService.shuffleArray(numbers);
-
     this.passButtons = [
       {
         opt1: numbers[0],
@@ -85,25 +89,18 @@ export class SigninComponent implements OnInit {
       }
     ];
 
+    // Set login type
+    let id = localStorage.getItem('loginEasyId');
+    this.loginMode = id ? 'easy' : 'normal';
+    
+    // Set current step
     let user = localStorage.getItem('currentUserPresentation');
-    if (user) {
-      this.currentUser = JSON.parse(user);
-      this.currentStep = 'password';
-    } else {
-      this.currentStep = 'email';
-    }
+    this.currentUser = user ? JSON.parse(user) : null;
+    this.currentStep = user ? 'password' : 'email';
   }
 
   ngAfterViewInit() {
-    // setTimeout(() => this.inputEmail.nativeElement.focus());
-  }
 
-  get emailField() {
-    return this.emailForm.controls;
-  }
-
-  get passwordField() {
-    return this.passwordForm.controls;
   }
 
   passAdd(value1, value2) {
@@ -125,27 +122,99 @@ export class SigninComponent implements OnInit {
   getPresentation(): void {
     this.emailSent = true;
 
+    if (this.emailForm.invalid){
+      if (this.emailForm.controls.email.errors.required) {
+        this.emailErrorMsg = 'Please type your email!';
+      } else if (this.emailForm.controls.email.errors.email) {
+        this.emailErrorMsg = 'Invalid email!';
+      }
+
+      this.applyShakeAnimation('email');
+      return;
+    }
+
     this.httpService.buildUrl('users/presentation')
-    .getPresentation(this.emailForm.value).subscribe(
+    .getPresentation(this.emailForm.value)
+    .subscribe(
       res => {
-        localStorage.setItem('currentUserPresentation', JSON.stringify(res));
-        this.currentUser = res;
-        this.currentStep = 'password';
-      }, error => {
-        console.log(error)
+        // Add logic here
+        // this.currentUser = res;
+        // this.currentStep = 'password';
+      }, (error: HttpErrorResponse) => {
+        if (error.status === 404) {
+          this.emailErrorMsg = 'Email not registered!';
+          this.applyShakeAnimation('email');
+        }
       }
     )
   }
 
   removeCurrentUser(): void {
     localStorage.clear();
-
-    this.currentStep = 'email'
+    this.passwordSent = false;
+    this.emailSent = false;
     this.emailForm.get('email').setValue("");
+    this.currentStep = 'email';
     this.currentUser = null;
   }
 
+  applyShakeAnimation(target: string): void {
+    const tgt = target + 'AnimateShake';
+
+    if (this[tgt] === undefined)
+      return
+
+    this[tgt] = true;
+
+    setTimeout(() => {
+      if (this[tgt]) this[tgt] = false;
+    }, 800)
+  }
+
   login(): void {
+    this.passwordSent = true;
+
+    if (this.passwordForm.invalid) {
+      this.applyShakeAnimation('password');
+      return;
+    }
     
+    if (this.loginMode === 'normal'){
+      const email = this.emailForm.controls['email'].value;
+      const password = this.passwordForm.controls['password'].value;
+
+      this.httpService.buildUrl('users/login')
+      .login(email, password)
+      .subscribe(
+        res => {
+          console.log('res')
+          console.log(res)
+        }, (error: HttpErrorResponse) => {
+          console.log(error);
+          if(error.status === 400) {
+            this.applyShakeAnimation('password');
+          }
+        }  
+      )
+    } else {
+      const id = this.currentUser._id;
+      const email = this.currentUser.email;
+      const password = this.password;
+
+      this.httpService.buildUrl('users/login')
+      .loginEasy(id, email, password)
+      .subscribe(
+        res => {
+          console.log('res')
+          console.log(res)
+        }, error => {
+          console.log('error')
+          console.log(error)
+        }
+      )
+    }
+
+
+        // localStorage.setItem('currentUserPresentation', JSON.stringify(res));
   }
 }
