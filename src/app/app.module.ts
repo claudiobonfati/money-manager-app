@@ -9,6 +9,7 @@ import { WelcomeModule } from './welcome/welcome.module';
 import { LoginModule } from './login/login.module';
 import { RegisterModule } from './register/register.module';
 import { UsersModule } from './users/users.module';
+import { UnauthGuard } from 'src/app/core/guards/unauth.guard'
 
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -22,18 +23,21 @@ const appRoutes: Routes = [
   { 
     path: '', 
     component: WelcomeComponent,
+    canActivate: [UnauthGuard],
     data: {
       class: "page-welcome"
     }
   }, { 
     path: 'login', 
     component: LoginComponent,
+    canActivate: [UnauthGuard],
     data: {
       class: "page-login"
     }
   }, { 
     path: 'register', 
     component: RegisterComponent,
+    canActivate: [UnauthGuard],
     data: {
       class: "page-register"
     }

@@ -4,7 +4,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HelperService } from 'src/app/core/services/helper.service';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { environment } from 'src/environments/environment';
-import { HttpService } from 'src/app/core/services/http.service'
+import { HttpService } from 'src/app/core/services/http.service';
+import { Router } from '@angular/router';
+import { UserModel } from 'src/app/core/models/user.model'
+
 
 @Component({
   selector: 'app-login',
@@ -37,12 +40,13 @@ export class LoginComponent implements OnInit {
   public passwordSent = false;
   public passwordAnimateShake = false;
   public passButtons = [];
-  public password = [];
+  private password = [];
 
   constructor(
-    public formBuilder: FormBuilder,
-    public helperService: HelperService,
-    public httpService: HttpService
+    private formBuilder: FormBuilder,
+    private helperService: HelperService,
+    private httpService: HttpService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -137,7 +141,6 @@ export class LoginComponent implements OnInit {
     .getPresentation(this.emailForm.value)
     .subscribe(
       res => {
-        // Add logic here
         this.currentUser = res;
         this.currentStep = 'password';
       }, (error: HttpErrorResponse) => {
@@ -186,35 +189,32 @@ export class LoginComponent implements OnInit {
       this.httpService.buildUrl('users/login')
       .login(email, password)
       .subscribe(
-        res => {
-          console.log('res')
-          console.log(res)
+        (data: UserModel) => {
+          this.httpService.storeUser(data);
+
+          this.router.navigate['dashboard'];
         }, (error: HttpErrorResponse) => {
-          console.log(error);
-          if(error.status === 400) {
-            this.applyShakeAnimation('password');
-          }
+          if(error.status === 400)
+            this.applyShakeAnimation('password')
         }  
       )
     } else {
-      const id = this.currentUser._id;
+      const id = atob(localStorage.getItem('loginEasyId'));
       const email = this.currentUser.email;
       const password = this.password;
 
       this.httpService.buildUrl('users/login')
       .loginEasy(id, email, password)
       .subscribe(
-        res => {
-          console.log('res')
-          console.log(res)
-        }, error => {
-          console.log('error')
-          console.log(error)
+        (data: UserModel) => {
+          this.httpService.storeUser(data);
+
+          this.router.navigate['dashboard']
+        }, (error: HttpErrorResponse) => {
+          if(error.status === 400)
+            this.applyShakeAnimation('password')
         }
       )
     }
-
-
-        // localStorage.setItem('currentUserPresentation', JSON.stringify(res));
   }
 }

@@ -1,6 +1,8 @@
 export class UserModel {
-  id: string;
-  name: string;
-  email: string;
-  image: string;
+  user: {
+    _id: string,
+    name: string,
+    email: string
+  };
+  token: string;
 }

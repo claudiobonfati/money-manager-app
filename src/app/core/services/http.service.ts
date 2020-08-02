@@ -4,7 +4,8 @@ import { Router } from '@angular/router'
 import { environment } from '../../../environments/environment';
 import { UserModel } from './../models/user.model';
 import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { catchError, retry } from 'rxjs/operators'; 
+
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,22 @@ export class HttpService {
     public http: HttpClient,
     public router: Router
   ) { }
+
+  public checkAuth(): boolean {
+    let user = localStorage.getItem('user');
+
+    if (user) {
+      return true;
+    } else { 
+      return false;
+    }
+  }
+
+  public storeUser(data: UserModel): void {
+    localStorage.setItem('token', data.token);
+    localStorage.setItem('user', btoa(JSON.stringify(data.user)));
+    localStorage.setItem('loginEasyId', btoa(JSON.stringify(data.user._id)));
+  }
 
   public buildUrl(url: string) {
     this.url = environment.api_url + url;
