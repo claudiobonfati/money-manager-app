@@ -13,6 +13,13 @@ button
 [class*="field-theme-01"]
   position: relative
 
+
+  &.animate-shake
+    input, 
+    .icon-left, 
+    .icon-right
+      animation: shake .8s cubic-bezier(.36,.07,.19,.97) both
+
   input
     position: relative
     display: block
@@ -29,7 +36,6 @@ button
 
     &:focus
       outline: none
-      box-shadow: 0 0.3rem 0 0rem rgba(#FFFFFF, .15)
 
     &::placeholder
       color: #FFFFFF
@@ -54,6 +60,7 @@ button
 
   .icon-right
     right: 0
+    opacity: 0
     transform: scale(0)
     @include transition(all .2s ease-out)
   
@@ -61,7 +68,33 @@ button
     input
       padding-right: 25px
     .icon-right
+      opacity: 1
       transform: scale(1)
+
+  .error-msg
+    position: absolute
+    width: 100%
+    top: 100%
+    margin-top: 2px
+    left: 0
+    font-size: 13px
+    color: #FFFFFF
+    text-align: left
+    opacity: 0
+    @include transition(all .2s ease-out)
+
+    &.show
+      opacity: .5
+
+  @keyframes shake
+    10%, 90%
+      transform: translate3d(-1px, 0, 0)
+    20%, 80%
+      transform: translate3d(2px, 0, 0)
+    30%, 50%, 70%
+      transform: translate3d(-4px, 0, 0)
+    40%, 60%
+      transform: translate3d(4px, 0, 0)
 
   @each $color in $color-config
     &[class*="field-theme-01-#{nth($color, 1)}"]
@@ -74,8 +107,8 @@ button
           color: nth($color, 2)
         &::-ms-input-placeholder
           color: nth($color, 2)
-      &:focus
-        box-shadow: 0 0.3rem 0 0rem rgba(nth($color, 2), .15)
+        &:focus
+          border-bottom-color: nth($color, 2)
       .icon-left,
       .icon-right
           color: nth($color, 2)
