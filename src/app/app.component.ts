@@ -8,11 +8,34 @@ import {
   NavigationEnd,
   NavigationStart,
 } from '@angular/router';
+import { HttpService } from 'src/app/core/services/http.service';
+import { trigger, state, style, animate, transition } from '@angular/animations';
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.sass']
+  styleUrls: ['./app.component.sass'],
+  animations: [
+    trigger(
+      'inOutMenu', [
+        transition(
+          ':enter', [
+            style({ opacity: 0, transform: 'translateY(-250px)' }),
+            animate('.2s ease-out', 
+                    style({ opacity: 1, transform: 'translateY(0px)' }))
+          ]
+        ),
+        transition(
+          ':leave', [
+            style({  opacity: 1, transform: 'translateY(0px)' }),
+            animate('.2s ease-out', 
+                    style({ opacity: 0, transform: 'translateY(-250px)' }))
+          ]
+        )
+      ]
+    )
+  ]
 })
 export class AppComponent {
   public innerWidth: any;
@@ -24,7 +47,8 @@ export class AppComponent {
 
   constructor(
     public helperService: HelperService,
-    public router: Router
+    public router: Router,
+    public httpService: HttpService
   ) {
   }
 

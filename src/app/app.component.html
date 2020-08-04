@@ -9,7 +9,9 @@ ontouchstart="" >
 				<div id="bg-down"></div>
 			</div>
 			<router-outlet #routerOutlet="outlet"></router-outlet>
-			<!-- <app-menu *ngIf="httpService.isLoggedIn()"></app-menu> -->
+			<div class="mm-menu-wrapper" *ngIf="httpService.checkAuth()" [@inOutMenu]>
+				<app-menu></app-menu>
+			</div>
 		</div>
 	</div>
 </div>

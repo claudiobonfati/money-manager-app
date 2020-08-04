@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+// Temp tests
+  import { HttpService } from 'src/app/core/services/http.service';
 
 @Component({
   selector: 'app-menu',
@@ -7,7 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    // Temp tests
+      public httpService: HttpService
+  ) { }
 
   ngOnInit(): void {
   }

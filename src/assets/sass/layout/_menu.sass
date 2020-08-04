@@ -2,13 +2,17 @@
 // LAYOUT > MENU
 // ==========================================================================
 
-.menu-wrapper
+.mm-menu-wrapper
   position: absolute
   width: 100%
   height: 60px
   bottom: 0
   left: 0
   z-index: 15
+.menu-wrapper
+  position: relative
+  width: 100%
+  height: 60px
   svg 
     width: 0
     height: 0
@@ -68,8 +72,7 @@
       -webkit-align-items: center
       -ms-flex-align: center
       align-items: center
-      .eff-gooey
-        opacity: 0 
+      .eff-gooey 
         position: absolute
         width: 100%
         height: calc(50% + 5px)
@@ -77,7 +80,11 @@
         left: 0
         overflow: visible
         filter: url(#goo)
+        opacity: 0
+        animation: show-gooye .2s forwards
+        animation-delay: .2s
         .eff-top
+          opacity: 0 
           position: absolute
           display: block
           background-color: #FAFBFC
@@ -89,6 +96,7 @@
           @include transition(all .6s ease-out)
         &::after,
         &::before
+          opacity: 0
           position: absolute
           display: block
           content: ""
@@ -98,7 +106,7 @@
         &::after
           width: 100%
           height: 15px
-          top: -70px
+          top: -60px
           left: 0
           transform: rotate(90deg)
           border-radius: 15px
@@ -113,9 +121,13 @@
 
       &.active
         .eff-gooey
+          .eff-top
+            opacity: 1
           &::after
+            opacity: 1
             transform: translateY(35px) rotate(90deg)
           &::before
+            opacity: 1
             transform: scale(1)
 
       a
@@ -180,3 +192,9 @@
           color: map-get($color-config, "red") !important
           &::before
             opacity: 1
+
+@keyframes show-gooye
+  0%
+    opacity: 0
+  100%
+    opacity: 1
