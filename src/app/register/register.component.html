@@ -9,12 +9,12 @@
             </a>
           </div>
           <div class="w-100 position-relative">
-            <div class="w-100" *ngIf="registerVisible" [@panelInOut]>
+            <div class="w-100" *ngIf="currentStep === 'email'" [@panelInOut]>
               <p class="lay-color-aluminium mb-5">Tell me who you are</p>
-              <form [formGroup]="registerForm" (ngSubmit)="storeInfo()">
+              <form [formGroup]="registerForm" (ngSubmit)="validateRegister()">
                 <div class="w-100 px-3">
                   <div class="field-theme-01-athens-gray mb-3"
-                    [ngClass]="{ 'is-invalid': registerSent && registerField.name.errors }">
+                    [class.is-invalid]="registerSent && registerForm.controls.name.errors">
                     <span class="icomoon-person icon-left"></span>
                     <input type="text" 
                     placeholder="Name" 
@@ -23,12 +23,14 @@
                     <span class="icomoon-warning icon-right"></span>
                   </div>
                   <div class="field-theme-01-athens-gray mb-5" 
-                    [ngClass]="{ 'is-invalid': registerSent && registerField.email.errors }">
+                    [class.is-invalid]="registerSent && registerForm.controls.email.errors"
+                    [class.animate-shake]="emailAnimateShake">
                     <span class="icomoon-mail icon-left"></span>
                     <input type="text" 
                     placeholder="Email" 
                     formControlName="email" >
                     <span class="icomoon-warning icon-right"></span>
+                    <span class="error-msg" [class.show]="registerSent && emailErrorMsg">{{ emailErrorMsg }}</span>
                   </div>
                 </div>
                 <div class="w-100">
@@ -38,12 +40,12 @@
                 </div>
               </form>
             </div>
-            <div class="w-100" *ngIf="passwordVisible" [@panelInOut]>
+            <div class="w-100" *ngIf="currentStep === 'password'" [@panelInOut]>
               <p class="lay-color-aluminium mb-5">Type your new password</p>
-              <form [formGroup]="passwordForm" (ngSubmit)="send()">
+              <form [formGroup]="passwordForm" (ngSubmit)="register()">
                 <div class="w-100 px-3">
                   <div class="field-theme-01-athens-gray mb-3"
-                    [ngClass]="{ 'is-invalid': passwordSent && passwordField.password.errors }">
+                    [class.is-invalid]="passwordSent && passwordForm.controls.password.errors">
                     <span class="icomoon-lock-closed icon-left"></span>
                     <input type="password" 
                     placeholder="Password"
@@ -53,7 +55,8 @@
                     <span class="icomoon-warning icon-right"></span>
                   </div>
                   <div class="field-theme-01-athens-gray mb-5" 
-                    [ngClass]="{ 'is-invalid': passwordSent && passwordField.confirm.errors }">
+                    [class.is-invalid]="passwordSent && passwordForm.controls.confirm.errors"
+                    [class.animate-shake]="confirmAnimateShake">
                     <span class="icomoon-lock-closed icon-left"></span>
                     <input type="password" 
                     placeholder="Confirm password"
@@ -61,6 +64,7 @@
                     inputmode="numeric" 
                     formControlName="confirm" >
                     <span class="icomoon-warning icon-right"></span>
+                    <span class="error-msg" [class.show]="passwordSent && confirmErrorMsg">{{ confirmErrorMsg }}</span>
                   </div>
                 </div>
                 <div class="w-100">
