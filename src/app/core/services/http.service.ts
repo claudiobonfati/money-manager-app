@@ -35,9 +35,20 @@ export class HttpService {
   }
 
   public storeUser(data: UserModel): void {
-    localStorage.setItem('token', data.token);
+    localStorage.setItem('token', btoa(data.token));
     localStorage.setItem('user', btoa(JSON.stringify(data.user)));
-    localStorage.setItem('loginEasyId', btoa(JSON.stringify(data.user._id)));
+    
+    this.storeLoginEasy(data);
+  }
+
+  public storeLoginEasy(data: UserModel): void {
+    localStorage.setItem('loginEasyId', btoa(data.user._id));
+    localStorage.setItem('loginEasyName', btoa(data.user.name));
+  }
+
+  public clearLoginEasy(): void {
+    localStorage.removeItem('loginEasyId');
+    localStorage.removeItem('loginEasyName');
   }
 
   public buildUrl(url: string) {
@@ -49,22 +60,43 @@ export class HttpService {
     return this.http.post<object>(this.url, email);
   }
 
-  public login(email: string, password: string): Observable<any> {
-    let content = {
-      email,
-      password
-    }
-
-    return this.http.post<any>(this.url, content);
+  public post(body: object): Observable<any> {
+    return this.http.post<object>(this.url, body);
   }
 
-  public loginEasy(_id: string, email: string, password: Array<any>): Observable<any> {
-    let content = {
-      _id,
+  public login(email: string, password: string): Observable<any> {
+    let body = {
       email,
       password
     }
 
-    return this.http.post<any>(this.url, content);
+    return this.http.post<any>(this.url, body);
+  }
+
+  public loginEasy(_id: string, password: Array<any>): Observable<any> {
+    let body = {
+      _id,
+      password
+    }
+
+    return this.http.post<any>(this.url, body);
+  }
+
+  public logout(): any {
+    this.buildUrl('/users/logout');
+    this.clearLocalUserData();
+
+    // return this.http.post<any>(this.url);
+    // console.log('set htto request')
+    this.router.navigate(['/'])
+  }
+
+  public getToken(): string {
+    return atob(localStorage.getItem('token'));
+  }
+
+  private clearLocalUserData(): void {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');  
   }
 }
