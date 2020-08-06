@@ -64,6 +64,10 @@ export class HttpService {
     return this.http.post<object>(this.url, body);
   }
 
+  public get(): Observable<any> {
+    return this.http.get(this.url);
+  }
+
   public login(email: string, password: string): Observable<any> {
     let body = {
       email,

@@ -27,7 +27,7 @@ import { UserModel } from 'src/app/core/models/user.model'
 })
 export class LoginComponent implements OnInit {
   public env = environment;
-  public currentUser: object;
+  public currentUser: any;
   public currentStep: string = '';
   public loginMode: string = '';
 
@@ -146,15 +146,31 @@ export class LoginComponent implements OnInit {
     this.httpService.buildUrl('users/presentation')
     .getPresentation(this.emailForm.value)
     .subscribe(
-      res => {
+      (res) => {
         this.currentUser = res;
         this.currentStep = 'password';
+
+        this.getUserAvatar()
       }, (error: HttpErrorResponse) => {
         if (error.status === 404) {
           this.emailErrorMsg = 'Email not registered!';
           this.applyShakeAnimation('email');
         }
       }
+    )
+  }
+
+  getUserAvatar(): void {
+    let avatarUrlEnd = `users/${this.currentUser._id}/avatar`;
+    let avatarUrlComplete = environment.api_url + avatarUrlEnd;
+
+    this.httpService.buildUrl(avatarUrlEnd)
+    .get().subscribe(
+      (data) => {
+        this.currentUser.avatar = avatarUrlComplete;
+      }, (error: HttpErrorResponse) => {
+        this.currentUser.avatar = 'assets/images/mascot.svg';
+      }  
     )
   }
 
