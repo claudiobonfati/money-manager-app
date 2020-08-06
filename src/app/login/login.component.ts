@@ -144,7 +144,7 @@ export class LoginComponent implements OnInit {
     }
 
     this.httpService.buildUrl('users/presentation')
-    .getPresentation(this.emailForm.value)
+    .post(this.emailForm.value)
     .subscribe(
       (res) => {
         this.currentUser = res;
@@ -165,7 +165,8 @@ export class LoginComponent implements OnInit {
     let avatarUrlComplete = environment.api_url + avatarUrlEnd;
 
     this.httpService.buildUrl(avatarUrlEnd)
-    .get().subscribe(
+    .get()
+    .subscribe(
       (data) => {
         this.currentUser.avatar = avatarUrlComplete;
       }, (error: HttpErrorResponse) => {
@@ -210,7 +211,7 @@ export class LoginComponent implements OnInit {
       const password = this.passwordForm.controls['password'].value;
 
       this.httpService.buildUrl('users/login')
-      .login(email, password)
+      .post({ email, password })
       .subscribe(
         (data: UserModel) => {
           this.httpService.storeUser(data);
@@ -225,7 +226,7 @@ export class LoginComponent implements OnInit {
       const password = this.password;
 
       this.httpService.buildUrl('users/loginEasy')
-      .loginEasy(id, password)
+      .post({ _id: id, password })
       .subscribe(
         (data: UserModel) => {
           this.httpService.storeUser(data);

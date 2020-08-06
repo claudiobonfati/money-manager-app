@@ -56,34 +56,12 @@ export class HttpService {
     return this;
   }
 
-  public getPresentation(email: object): Observable<any> {
-    return this.http.post<object>(this.url, email);
-  }
-
   public post(body: object): Observable<any> {
     return this.http.post<object>(this.url, body);
   }
 
   public get(): Observable<any> {
     return this.http.get(this.url);
-  }
-
-  public login(email: string, password: string): Observable<any> {
-    let body = {
-      email,
-      password
-    }
-
-    return this.http.post<any>(this.url, body);
-  }
-
-  public loginEasy(_id: string, password: Array<any>): Observable<any> {
-    let body = {
-      _id,
-      password
-    }
-
-    return this.http.post<any>(this.url, body);
   }
 
   public logout(): any {
