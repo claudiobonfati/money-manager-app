@@ -35,6 +35,7 @@ export class RegisterComponent implements OnInit {
   public passwordForm: FormGroup;
   public passwordSent: boolean = false;
   public confirmErrorMsg: string;
+  public passwordAnimateShake: boolean = false;
   public confirmAnimateShake: boolean = false;
 
   @ViewChild('inputName') inputName:ElementRef;
@@ -151,5 +152,21 @@ export class RegisterComponent implements OnInit {
     setTimeout(() => {
       if (this[tgt]) this[tgt] = false;
     }, 800)
+  }
+
+  onPasswordChange(field: string, val: string): void {
+    let password = this.passwordForm.get(field).value;
+
+    if (password.match(/\D/g)) {
+      this.applyShakeAnimation(field);
+      password = password.replace(/\D/g, '');
+
+      this.passwordForm.get(field).setValue(password);
+    } else if (password.length > 6) {
+      this.applyShakeAnimation(field);
+      password = password.substring(0, 6);
+
+      this.passwordForm.get(field).setValue(password);
+    }
   }
 }

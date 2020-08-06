@@ -27,20 +27,20 @@ import { UserModel } from 'src/app/core/models/user.model'
 })
 export class LoginComponent implements OnInit {
   public env = environment;
-  public currentUser = null;
-  public currentStep = '';
-  public loginMode = '';
+  public currentUser: object;
+  public currentStep: string = '';
+  public loginMode: string = '';
 
   public emailForm: FormGroup;
-  public emailSent = false;
-  public emailErrorMsg = null;
-  public emailAnimateShake = false;
+  public emailSent: boolean = false;
+  public emailErrorMsg: string;
+  public emailAnimateShake: boolean = false;
 
   public passwordForm: FormGroup;
-  public passwordSent = false;
-  public passwordAnimateShake = false;
-  public passButtons = [];
-  private password = [];
+  public passwordSent: boolean = false;
+  public passwordAnimateShake: boolean = false;
+  public passButtons: Array<any> = [];
+  private password: Array<any> = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -94,13 +94,19 @@ export class LoginComponent implements OnInit {
     ];
 
     // Set login type
-    let id = localStorage.getItem('loginEasyId');
-    this.loginMode = id ? 'easy' : 'normal';
+    let _id = localStorage.getItem('loginEasyId');
+    let name = localStorage.getItem('loginEasyName');
     
-    // Set current step
-    let user = localStorage.getItem('currentUserPresentation');
-    this.currentUser = user ? JSON.parse(user) : null;
-    this.currentStep = user ? 'password' : 'email';
+    if (_id && name) {
+      _id = atob(_id);
+      name = atob(name);
+      this.loginMode = 'easy';
+      this.currentStep = 'password';
+      this.currentUser = { _id, name };
+    } else {
+      this.loginMode = 'normal';
+      this.currentStep = 'email';
+    }
   }
 
   ngAfterViewInit() {
@@ -153,12 +159,13 @@ export class LoginComponent implements OnInit {
   }
 
   removeCurrentUser(): void {
-    localStorage.clear();
-    this.passwordSent = false;
-    this.emailSent = false;
-    this.emailForm.get('email').setValue("");
+    this.httpService.clearLoginEasy();
+    this.loginMode = 'normal';
     this.currentStep = 'email';
     this.currentUser = null;
+    this.passwordSent = false;
+    this.emailSent = false;
+    this.emailForm.get('email').setValue('');
   }
 
   applyShakeAnimation(target: string): void {
@@ -191,28 +198,25 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (data: UserModel) => {
           this.httpService.storeUser(data);
-
-          this.router.navigate['dashboard'];
+          this.router.navigate(['dashboard']);
         }, (error: HttpErrorResponse) => {
           if(error.status === 400)
-            this.applyShakeAnimation('password')
+            this.applyShakeAnimation('password');
         }  
       )
     } else {
       const id = atob(localStorage.getItem('loginEasyId'));
-      const email = this.currentUser.email;
       const password = this.password;
 
-      this.httpService.buildUrl('users/login')
-      .loginEasy(id, email, password)
+      this.httpService.buildUrl('users/loginEasy')
+      .loginEasy(id, password)
       .subscribe(
         (data: UserModel) => {
           this.httpService.storeUser(data);
-
-          this.router.navigate['dashboard']
+          this.router.navigate(['./dashboard']);
         }, (error: HttpErrorResponse) => {
           if(error.status === 400)
-            this.applyShakeAnimation('password')
+            this.applyShakeAnimation('password');
         }
       )
     }
