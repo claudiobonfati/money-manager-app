@@ -149,29 +149,12 @@ export class LoginComponent implements OnInit {
       (res) => {
         this.currentUser = res;
         this.currentStep = 'password';
-
-        this.getUserAvatar()
       }, (error: HttpErrorResponse) => {
         if (error.status === 404) {
           this.emailErrorMsg = 'Email not registered!';
           this.applyShakeAnimation('email');
         }
       }
-    )
-  }
-
-  getUserAvatar(): void {
-    let avatarUrlEnd = `users/${this.currentUser._id}/avatar`;
-    let avatarUrlComplete = environment.api_url + avatarUrlEnd;
-
-    this.httpService.buildUrl(avatarUrlEnd)
-    .get()
-    .subscribe(
-      (data) => {
-        this.currentUser.avatar = avatarUrlComplete;
-      }, (error: HttpErrorResponse) => {
-        this.currentUser.avatar = 'assets/images/mascot.svg';
-      }  
     )
   }
 
