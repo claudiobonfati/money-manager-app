@@ -85,15 +85,6 @@ button
     &.show
       opacity: .5
 
-  @keyframes shake
-    10%, 90%
-      transform: translate3d(-1px, 0, 0)
-    20%, 80%
-      transform: translate3d(2px, 0, 0)
-    30%, 50%, 70%
-      transform: translate3d(-4px, 0, 0)
-    40%, 60%
-      transform: translate3d(4px, 0, 0)
 
   @each $color in $color-config
     &[class*="field-theme-01-#{nth($color, 1)}"]
@@ -112,6 +103,94 @@ button
       .icon-right
           color: nth($color, 2)
 
+@keyframes shake
+  10%, 90%
+    transform: translate3d(-1px, 0, 0)
+  20%, 80%
+    transform: translate3d(2px, 0, 0)
+  30%, 50%, 70%
+    transform: translate3d(-4px, 0, 0)
+  40%, 60%
+    transform: translate3d(4px, 0, 0)
+
+
+[class*="field-theme-02"]
+  position: relative
+  width: 100%
+  padding: 10px 20px
+  border-radius: 20px
+  display: -ms-flexbox
+  display: -webkit-flex
+  display: flex
+  -webkit-flex-direction: row
+  -ms-flex-direction: row
+  flex-direction: row
+  -webkit-flex-wrap: nowrap
+  -ms-flex-wrap: nowrap
+  flex-wrap: nowrap
+  -webkit-justify-content: flex-start
+  -ms-flex-pack: start
+  justify-content: flex-start
+  -webkit-align-content: stretch
+  -ms-flex-line-pack: stretch
+  align-content: stretch
+  -webkit-align-items: center
+  -ms-flex-align: center
+  align-items: center
+  &.animate-shake
+    animation: shake .8s cubic-bezier(.36,.07,.19,.97) both
+
+  input
+    position: relative
+    background-color: transparent
+    font-weight: bold
+    border: 0
+    font-size: 14px
+    height: 30px
+    width: inherit
+    -webkit-order: 0
+    -ms-flex-order: 0
+    order: 0
+    -webkit-flex: 1 1 auto
+    -ms-flex: 1 1 auto
+    flex: 1 1 auto
+    -webkit-align-self: auto
+    -ms-flex-item-align: auto
+    align-self: auto
+    -webkit-appearance: none
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-calendar-picker-indicator
+      display: none
+      -webkit-appearance: none
+
+    &:focus
+      outline: none
+
+    &::placeholder
+      color: #FFFFFF
+      opacity: .5
+    &:-ms-input-placeholder
+      color: #FFFFFF
+      opacity: .5
+    &::-ms-input-placeholder
+      color: #FFFFFF
+      opacity: .5
+  label 
+    margin: 0
+    -webkit-order: 0
+    -ms-flex-order: 0
+    order: 0
+    -webkit-flex: 0 1 auto
+    -ms-flex: 0 1 auto
+    flex: 0 1 auto
+    -webkit-align-self: auto
+    -ms-flex-item-align: auto
+    align-self: auto
+
+  &.field-theme-02-light
+    background-color: #FFFFFF
+
 .number-keyboard
   -moz-appearance: textfield
 
@@ -120,3 +199,8 @@ button
   -webkit-appearance: none
   margin: 0
 
+.field-inline-invisible
+  background-color: transparent
+  border: 0
+  padding: 0
+  display: inline-block

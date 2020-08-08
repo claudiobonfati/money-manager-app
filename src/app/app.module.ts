@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from 'src/app/core/interceptors/auth.interceptor';
 
-
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { AppRoutingModule } from './app-routing.module';
 import { WelcomeModule } from './welcome/welcome.module';
@@ -20,6 +19,18 @@ import { RegisterComponent } from './register/register.component';
 import { MenuComponent } from './core/components/menu/menu.component';
 
 import { environment } from '../environments/environment';
+
+import { FeatherModule } from 'angular-feather';
+import { Home, Plus, User, Mail, Key, Delete } from 'angular-feather/icons';
+
+const icons = {
+  Home,
+  Plus,
+  User,
+  Mail,
+  Key,
+  Delete
+};
 
 const appRoutes: Routes = [
   { 
@@ -60,7 +71,8 @@ const appRoutes: Routes = [
     WelcomeModule,
     LoginModule,
     RegisterModule,
-    UsersModule
+    UsersModule,
+    FeatherModule.pick(icons)
   ],
   providers: [
     {

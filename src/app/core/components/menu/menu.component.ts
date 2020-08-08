@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 // Temp tests
   import { HttpService } from 'src/app/core/services/http.service';
 
@@ -7,8 +8,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.sass']
 })
-export class MenuComponent implements OnInit {
-
+export class MenuComponent implements OnInit {  
   constructor(
     // Temp tests
       public httpService: HttpService

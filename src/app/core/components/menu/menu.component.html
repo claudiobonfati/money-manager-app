@@ -3,29 +3,29 @@
     <li routerLinkActive="active">
       <div class="eff-gooey"><span class="eff-top"></span></div>
       <a routerLink="/dashboard">
-        <i class="icomoon-home"></i>
+        <i-feather name="home"></i-feather>
       </a>
     </li>
     <li routerLinkActive="active">
       <div class="eff-gooey"><span class="eff-top"></span></div>
       <a routerLink="/new-transaction">
-        <i class="icomoon-add-circle"></i>
+        <i-feather name="plus"></i-feather>
       </a>
     </li>
     <li routerLinkActive="active">
       <div class="eff-gooey"><span class="eff-top"></span></div>
-      <a routerLink="/register">
-        <i class="icomoon-person"></i>
+      <a routerLink="/profile">
+        <i-feather name="user"></i-feather>
       </a>
     </li>
     <li>
       <div class="eff-gooey"><span class="eff-top"></span></div>
       <a (click)="httpService.logout()">
-        <i class="icomoon-body"></i>
+        <i-feather name="user"></i-feather>
       </a>
     </li>
   </ul>
-  <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+  <svg class="svg-gooey" xmlns="http://www.w3.org/2000/svg" version="1.1">
     <defs>
       <filter id="goo">
         <feGaussianBlur id="blur" in="SourceGraphic" result="blur" stdDeviation="10" />

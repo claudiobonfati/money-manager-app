@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Router } from '@angular/router'
 import { environment } from '../../../environments/environment';
 import { UserModel } from './../models/user.model';
+import { ProfileModel } from './../models/profile.model';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators'; 
 
@@ -11,6 +12,7 @@ import { catchError, retry } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class HttpService {
+  public currentUser: ProfileModel;
   private url: string;
   private httpOptions = {
     headers: new HttpHeaders({
@@ -37,8 +39,13 @@ export class HttpService {
   public storeUser(data: UserModel): void {
     localStorage.setItem('token', btoa(data.token));
     localStorage.setItem('user', btoa(JSON.stringify(data.user)));
+    this.currentUser = data.user;
     
     this.storeLoginEasy(data);
+  }
+
+  public getUser(): any {
+    return JSON.parse(atob(localStorage.getItem('user')));
   }
 
   public storeLoginEasy(data: UserModel): void {

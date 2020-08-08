@@ -1,0 +1,55 @@
+<div id="mm-content-wrapper" class="full-page">
+  <div class="w-100 h-100">
+    <div class="container h-100">
+      <div class="row h-100 justify-content-center">
+        <div class="col-12 text-center pt-5">
+          <div class="profile-pick-wrapper">
+            <div class="profile-pick">
+              <file-pond #myPond 
+                [options]="pondOptions" 
+                [files]="pondFiles"
+                (oninit)="pondHandleInit()"
+                (onaddfile)="pondHandleAddFile($event)">
+              </file-pond>
+            </div>
+            <!-- <button class="lay-bg-outer-space d-flex justify-content-center align-items-center">
+              <i-feather name="plus" class="feather-20 text-white"></i-feather>
+            </button> -->
+          </div>
+          <input class="field-inline-invisible font-weight-bold lay-color-outer-space font-lg w-100 text-center" value="Claudio"  size="6" />
+        </div>
+        <div class="col-12 pt-5">
+            <!-- <form [formGroup]="passwordForm" (ngSubmit)="login()"> -->
+            <form>
+              <div class="field-theme-02-light mb-3">
+                <input type="email" 
+                placeholder="Email"
+                disabled="true"
+                formControlName="email"
+                id="profile-email">
+                <label for="profile-email">Email</label>
+              </div>
+              <div class="field-theme-02-light mb-3"
+                [class.is-invalid]="profileSent && profileForm.controls.birthday.errors"
+                [class.animate-shake]="birthdayAnimateShake">
+                <input type="date" 
+                placeholder="00/00/0000"
+                formControlName="birthday"
+                id="profile-birthday">
+                <label for="profile-birthday">Birthday</label>
+              </div>
+              <div class="field-theme-02-light mb-3"
+                [class.is-invalid]="profileSent && profileForm.controls.currency.errors"
+                [class.animate-shake]="currencyAnimateShake">
+                <input type="text" 
+                placeholder="$"
+                formControlName="currency"
+                id="profile-currency">
+                <label for="profile-currency">Currency</label>
+              </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

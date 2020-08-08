@@ -1,8 +1,6 @@
+import { ProfileModel } from 'src/app/core/models/profile.model'
+
 export class UserModel {
-  user: {
-    _id: string,
-    name: string,
-    email: string
-  };
-  token: string;
+  user: ProfileModel
+  token: string
 }
