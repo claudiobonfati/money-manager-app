@@ -12,8 +12,6 @@ import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
 import FilePondPluginImageCrop from 'filepond-plugin-image-crop';
 import FilePondPluginImageResize from 'filepond-plugin-image-resize';
-import FilePondPluginImageTransform from 'filepond-plugin-image-transform';
-import FilePondPluginImageEdit from 'filepond-plugin-image-edit';
 
 
 registerPlugin(
@@ -22,8 +20,6 @@ registerPlugin(
   FilePondPluginImagePreview,
   FilePondPluginImageCrop,
   FilePondPluginImageResize,
-  FilePondPluginImageTransform,
-  FilePondPluginImageEdit
 );
 
 import { FeatherModule } from 'angular-feather';
