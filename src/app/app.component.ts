@@ -9,7 +9,7 @@ import {
   NavigationStart,
 } from '@angular/router';
 import { HttpService } from 'src/app/core/services/http.service';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import { trigger, style, group, query, animate, transition } from '@angular/animations';
 
 
 @Component({
@@ -17,6 +17,38 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.sass'],
   animations: [
+    trigger(
+      'inOutRoute', [
+        transition('* <=> *', [
+          group([
+            query(
+              ':enter',
+              [
+                style({
+                  opacity: 0,
+                  transform: 'scale(.95)'
+                }),
+                animate(
+                  '.2s ease-out',
+                  style({ opacity: 1, transform: 'scale(1)' })
+                )
+              ],
+              { optional: true }
+            ),
+            query(
+              ':leave',
+              [
+                animate(
+                  '.2s ease-out', 
+                  style({ opacity: 0 })
+                )
+              ],
+              { optional: true }
+            )
+          ])
+        ])
+      ]
+    ),
     trigger(
       'inOutMenu', [
         transition(
@@ -74,5 +106,9 @@ export class AppComponent {
 
   getRouteClass(outlet: RouterOutlet) {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData['class'];
+  }
+
+  prepareRoute(outlet: RouterOutlet) {
+    return outlet.activatedRouteData['class'];
   }
 }

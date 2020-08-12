@@ -3,12 +3,14 @@
 ontouchstart="" >
 	<div id="mm-wrapper-router" 
 	[ngClass]="centralized ? 'centralized' : ''">
-		<div id="mm-wrapper-inner" class="box-general-content">
-			<div id="mm-bg-elements" [ngClass]="getRouteClass(routerOutlet)">
+		<div id="mm-wrapper-inner" [ngClass]="getRouteClass(routerOutlet)" class="box-general-content">
+			<div id="mm-bg-elements">
 				<div id="bg-up"></div>
 				<div id="bg-down"></div>
 			</div>
-			<router-outlet #routerOutlet="outlet"></router-outlet>
+			<div class="w-100" [@inOutRoute]="prepareRoute(routerOutlet)">
+				<router-outlet #routerOutlet="outlet"></router-outlet>
+			</div>
 			<div class="mm-menu-wrapper" *ngIf="httpService.checkAuth()" [@inOutMenu]>
 				<app-menu></app-menu>
 			</div>
