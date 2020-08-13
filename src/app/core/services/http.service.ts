@@ -6,6 +6,7 @@ import { UserModel } from './../models/user.model';
 import { ProfileModel } from './../models/profile.model';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators'; 
+import { BehaviorSubject } from 'rxjs';
 
 
 @Injectable({
@@ -14,12 +15,7 @@ import { catchError, retry } from 'rxjs/operators';
 export class HttpService {
   public currentUser: ProfileModel;
   private url: string;
-  private httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type':  'application/json',
-      'Access-Control-Allow-Origin': '*'
-    })
-  };
+  public test: string;
 
   constructor(
     public http: HttpClient,
@@ -27,30 +23,28 @@ export class HttpService {
   ) { }
 
   public checkAuth(): boolean {
-    let user = localStorage.getItem('user');
+    let user = localStorage.getItem('currentUser');
 
-    if (user) {
-      return true;
-    } else { 
-      return false;
-    }
+    return user ? true : false;
   }
 
-  public storeUser(data: UserModel): void {
-    localStorage.setItem('token', btoa(data.token));
-    localStorage.setItem('user', btoa(JSON.stringify(data.user)));
+  public saveLocalUser(data: UserModel): void {
     this.currentUser = data.user;
-    
-    this.storeLoginEasy(data);
-  }
-
-  public getUser(): any {
-    return JSON.parse(atob(localStorage.getItem('user')));
-  }
-
-  public storeLoginEasy(data: UserModel): void {
+    localStorage.setItem('currentUser', btoa(JSON.stringify(data.user)));
     localStorage.setItem('loginEasyId', btoa(data.user._id));
     localStorage.setItem('loginEasyName', btoa(data.user.name));
+    if (data.token)
+      localStorage.setItem('token', btoa(data.token));
+  }
+
+  public getLocalUser(): ProfileModel {
+    let userData = this.currentUser ? this.currentUser : JSON.parse(atob(localStorage.getItem('currentUser')));
+
+    if (userData) {
+      return userData;
+    } else {
+      this.logout();
+    }
   }
 
   public clearLoginEasy(): void {
@@ -58,17 +52,9 @@ export class HttpService {
     localStorage.removeItem('loginEasyName');
   }
 
-  public buildUrl(url: string) {
-    this.url = environment.api_url + url;
-    return this;
-  }
-
-  public post(body: object): Observable<any> {
-    return this.http.post<object>(this.url, body);
-  }
-
-  public get(): Observable<any> {
-    return this.http.get(this.url);
+  private clearLocalUserData(): void {
+    localStorage.removeItem('token');
+    localStorage.removeItem('currentUser');  
   }
 
   public logout(): any {
@@ -76,7 +62,6 @@ export class HttpService {
     this.clearLocalUserData();
 
     // return this.http.post<any>(this.url);
-    // console.log('set htto request')
     this.router.navigate(['/'])
   }
 
@@ -84,8 +69,20 @@ export class HttpService {
     return atob(localStorage.getItem('token'));
   }
 
-  private clearLocalUserData(): void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');  
+  public buildUrl(url: string) {
+    this.url = environment.api_url + url;
+    return this;
+  }
+
+  public get(): Observable<any> {
+    return this.http.get(this.url);
+  }
+
+  public post(body: object): Observable<any> {
+    return this.http.post<object>(this.url, body);
+  }
+
+  public patch(body: object): Observable<any> {
+    return this.http.patch<object>(this.url, body);
   }
 }

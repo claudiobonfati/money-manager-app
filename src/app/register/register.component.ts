@@ -5,6 +5,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpService } from 'src/app/core/services/http.service';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { Router } from '@angular/router';
+import { UserModel } from 'src/app/core/models/user.model';
+
 
 @Component({
   selector: 'app-register',
@@ -130,8 +132,8 @@ export class RegisterComponent implements OnInit {
 
     this.httpService.buildUrl('users').post(body)
     .subscribe(
-      data => {
-        this.httpService.storeUser(data);
+      (data: UserModel) => {
+        this.httpService.saveLocalUser(data);
         this.router.navigate(['dashboard']);
       }, (error: HttpErrorResponse) => {
         console.log(error)

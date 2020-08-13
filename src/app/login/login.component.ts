@@ -197,7 +197,7 @@ export class LoginComponent implements OnInit {
       .post({ email, password })
       .subscribe(
         (data: UserModel) => {
-          this.httpService.storeUser(data);
+          this.httpService.saveLocalUser(data);
           this.router.navigate(['dashboard']);
         }, (error: HttpErrorResponse) => {
           if(error.status === 400)
@@ -212,7 +212,7 @@ export class LoginComponent implements OnInit {
       .post({ _id: id, password })
       .subscribe(
         (data: UserModel) => {
-          this.httpService.storeUser(data);
+          this.httpService.saveLocalUser(data);
           this.router.navigate(['./dashboard']);
         }, (error: HttpErrorResponse) => {
           if(error.status === 400)

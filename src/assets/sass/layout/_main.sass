@@ -13,18 +13,38 @@
     left: 0
     width: 100%
     height: calc(100% - 60px)
-    background-color: #FAFBFC
+    background-color: #f8f8f9
     border-radius: 0 0 15px 15px
     @include transition(all 0.2s ease-out)
     transform: translateY(-100%)
-  &.page-dashboard,
-  &.page-profile
-    #bg-up
-      transform: translateY(0%)
 
 #mm-content-wrapper
   width: 100%
   height: 100%
+
+#mm-wrapper-inner
+  &.page-dashboard,
+  &.page-profile
+    #mm-bg-elements
+      #bg-up  
+        transform: translateY(0%)
+    #mm-content-wrapper
+      height: calc(100% - 60px)
+  #mm-content-wrapper
+    height: 100%
+    overflow-y: scroll
+    -ms-overflow-style: !important
+
+
+::-webkit-scrollbar
+  display: none !important
+::-webkit-scrollbar-track
+  display: none !important
+::-webkit-scrollbar-thumb
+  display: none !important
+.container
+  padding: 0 20px
+
 
 #logo-mm
   max-width: 70%

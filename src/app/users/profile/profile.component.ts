@@ -1,10 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { environment } from 'src/environments/environment';
 import { HttpService } from 'src/app/core/services/http.service';
 import { ProfileModel } from 'src/app/core/models/profile.model';
-
-import { HttpErrorResponse } from '@angular/common/http';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HelperService } from 'src/app/core/services/helper.service';
+import { UserModel } from 'src/app/core/models/user.model';
 
 @Component({
   selector: 'app-profile',
@@ -39,41 +41,52 @@ export class ProfileComponent implements OnInit {
   ]
 
   pondHandleInit() {
-    console.log('FilePond has initialised', this.myPond);
+    // console.log('FilePond has initialised', this.myPond);
   }
 
   pondHandleAddFile(event: any) {
-    console.log('A file was added', event);
+    // console.log('A file was added', event);
   }
 
   constructor(
     private formBuilder: FormBuilder,
-    public httpService: HttpService
+    public httpService: HttpService,
+    public helperService: HelperService
   ) { }
 
   ngOnInit(): void {
-    this.currentUser = this.httpService.getUser();
+    this.currentUser = this.httpService.getLocalUser();
 
-    this.pondFiles = [
-      `${this.env.api_url}users/${this.currentUser._id}/avatar`
-    ]
+    if (this.currentUser.avatar)
+      this.pondFiles = [ this.env.api_url + this.currentUser.avatar ];
+
+    let birthday: string;
+    if (this.currentUser.birthday) {
+      birthday = new Date(this.currentUser.birthday).toISOString().substr(0,10);
+    }
+
+    console.log(this.currentUser.name)
+
     // Initiate forms
     this.profileForm = this.formBuilder.group({
+      name: [
+        this.currentUser.name,
+        [
+          Validators.required
+        ]
+      ],
       email: [
-        "test@test.com", 
+        {
+          value: this.currentUser.email,
+          disabled: true
+        },
         [
           Validators.required, 
           Validators.email
         ]
       ],
       birthday: [
-        "28/14/1997", 
-        [
-          Validators.required
-        ]
-      ],
-      currency: [
-        "US$", 
+        birthday, 
         [
           Validators.required
         ]
@@ -81,4 +94,46 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  getBirthdayInputType(): string {
+    if (this.helperService.isMobile()) {
+      return 'date';
+    } else if (this.currentUser.birthday) {
+      return 'date';
+    } else {
+      return 'text';
+    }
+  }
+
+  update() {
+    if (this.profileForm.invalid)
+      return
+
+    const body = {
+      name: this.profileForm.get('name').value,
+      birthday: this.profileForm.get('birthday').value
+    }
+
+    this.httpService.buildUrl('users/me')
+    .patch(body)
+    .subscribe(
+      (user: UserModel) => {
+        this.httpService.saveLocalUser(user);
+      }, (error: HttpErrorResponse) => {
+        console.log(error);
+      }
+    )
+
+
+    // this.currentUser 
+    // this.httpService.buildUrl('users/me')
+    // .patch().subscribe(
+    //   (res) => {
+      
+    //   }, (error: HttpErrorResponse) {
+    //     // Do something
+    //   }
+    // )
+
+    console.log('update')
+  }
 }

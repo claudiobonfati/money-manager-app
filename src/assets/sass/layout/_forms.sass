@@ -117,47 +117,24 @@ button
 [class*="field-theme-02"]
   position: relative
   width: 100%
-  padding: 10px 20px
+  padding: 25px 20px 10px
   border-radius: 20px
-  display: -ms-flexbox
-  display: -webkit-flex
-  display: flex
-  -webkit-flex-direction: row
-  -ms-flex-direction: row
-  flex-direction: row
-  -webkit-flex-wrap: nowrap
-  -ms-flex-wrap: nowrap
-  flex-wrap: nowrap
-  -webkit-justify-content: flex-start
-  -ms-flex-pack: start
-  justify-content: flex-start
-  -webkit-align-content: stretch
-  -ms-flex-line-pack: stretch
-  align-content: stretch
-  -webkit-align-items: center
-  -ms-flex-align: center
-  align-items: center
   &.animate-shake
     animation: shake .8s cubic-bezier(.36,.07,.19,.97) both
 
-  input
+  input,
+  select
     position: relative
     background-color: transparent
     font-weight: bold
     border: 0
     font-size: 14px
-    height: 30px
-    width: inherit
-    -webkit-order: 0
-    -ms-flex-order: 0
-    order: 0
-    -webkit-flex: 1 1 auto
-    -ms-flex: 1 1 auto
-    flex: 1 1 auto
-    -webkit-align-self: auto
-    -ms-flex-item-align: auto
-    align-self: auto
+    height: 18px
+    width: 100%
+    border: 0
+    padding: 0
     -webkit-appearance: none
+
 
     &::-webkit-inner-spin-button,
     &::-webkit-calendar-picker-indicator
@@ -176,20 +153,30 @@ button
     &::-ms-input-placeholder
       color: #FFFFFF
       opacity: .5
+
+    &:focus ~ label
+      transform: translateY(-11px) translateX(-5%) scale(.9)
+
+  &.filled 
+    label
+      transform: translateY(-11px) translateX(-5%) scale(.9)
+
   label 
     margin: 0
-    -webkit-order: 0
-    -ms-flex-order: 0
-    order: 0
-    -webkit-flex: 0 1 auto
-    -ms-flex: 0 1 auto
-    flex: 0 1 auto
-    -webkit-align-self: auto
-    -ms-flex-item-align: auto
-    align-self: auto
+    position: absolute
+    top: 50%
+    left: 20px
+    margin-top: -11px
+    @include transition(all .2s ease-out)
 
   &.field-theme-02-light
     background-color: #FFFFFF
+
+input[type=date]::-webkit-inner-spin-button,
+input[type=date]::-webkit-outer-spin-button,
+input[type=date]::-webkit-calendar-picker-indicator
+  display: none
+  -webkit-appearance: none
 
 .number-keyboard
   -moz-appearance: textfield
