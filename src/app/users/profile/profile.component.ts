@@ -6,7 +6,6 @@ import { environment } from 'src/environments/environment';
 import { HttpService } from 'src/app/core/services/http.service';
 import { ProfileModel } from 'src/app/core/models/profile.model';
 import { HelperService } from 'src/app/core/services/helper.service';
-import { UserModel } from 'src/app/core/models/user.model';
 
 @Component({
   selector: 'app-profile',
@@ -16,7 +15,6 @@ import { UserModel } from 'src/app/core/models/user.model';
 export class ProfileComponent implements OnInit {
   public env = environment;
   public currentUser: ProfileModel;
-
   public profileForm: FormGroup;
   public profileSent: boolean = false;
   public birthdayAnimateShake: boolean = false;
@@ -65,8 +63,6 @@ export class ProfileComponent implements OnInit {
       birthday = new Date(this.currentUser.birthday).toISOString().substr(0,10);
     }
 
-    console.log(this.currentUser.name)
-
     // Initiate forms
     this.profileForm = this.formBuilder.group({
       name: [
@@ -105,6 +101,8 @@ export class ProfileComponent implements OnInit {
   }
 
   update() {
+    this.profileSent = true;
+
     if (this.profileForm.invalid)
       return
 
@@ -116,7 +114,7 @@ export class ProfileComponent implements OnInit {
     this.httpService.buildUrl('users/me')
     .patch(body)
     .subscribe(
-      (user: UserModel) => {
+      (user: ProfileModel) => {
         this.httpService.saveLocalUser(user);
       }, (error: HttpErrorResponse) => {
         console.log(error);

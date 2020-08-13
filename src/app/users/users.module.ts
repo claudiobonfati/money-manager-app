@@ -3,16 +3,16 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'src/app/core/guards/auth.guard';
-
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from './profile/profile.component'
-
 import { FilePondModule, registerPlugin } from 'ngx-filepond';
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
 import FilePondPluginImageCrop from 'filepond-plugin-image-crop';
 import FilePondPluginImageResize from 'filepond-plugin-image-resize';
+import { FeatherModule } from 'angular-feather';
+import { Edit2, Plus } from 'angular-feather/icons';
 
 registerPlugin(
   FilePondPluginFileValidateType,
@@ -21,9 +21,6 @@ registerPlugin(
   FilePondPluginImageCrop,
   FilePondPluginImageResize,
 );
-
-import { FeatherModule } from 'angular-feather';
-import { Edit2, Plus } from 'angular-feather/icons';
 
 const icons = {
   Edit2,

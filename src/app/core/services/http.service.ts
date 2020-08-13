@@ -28,13 +28,18 @@ export class HttpService {
     return user ? true : false;
   }
 
-  public saveLocalUser(data: UserModel): void {
-    this.currentUser = data.user;
-    localStorage.setItem('currentUser', btoa(JSON.stringify(data.user)));
-    localStorage.setItem('loginEasyId', btoa(data.user._id));
-    localStorage.setItem('loginEasyName', btoa(data.user.name));
+  public createLocalUser(data: UserModel): void {
+    this.saveLocalUser(data.user)
+
     if (data.token)
       localStorage.setItem('token', btoa(data.token));
+  }
+
+  public saveLocalUser(user: ProfileModel): void {
+    this.currentUser = user;
+    localStorage.setItem('currentUser', btoa(JSON.stringify(user)));
+    localStorage.setItem('loginEasyId', btoa(user._id));
+    localStorage.setItem('loginEasyName', btoa(user.name));
   }
 
   public getLocalUser(): ProfileModel {

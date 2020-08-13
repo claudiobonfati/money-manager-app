@@ -133,7 +133,7 @@ export class RegisterComponent implements OnInit {
     this.httpService.buildUrl('users').post(body)
     .subscribe(
       (data: UserModel) => {
-        this.httpService.saveLocalUser(data);
+        this.httpService.createLocalUser(data);
         this.router.navigate(['dashboard']);
       }, (error: HttpErrorResponse) => {
         console.log(error)
