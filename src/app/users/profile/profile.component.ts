@@ -122,18 +122,5 @@ export class ProfileComponent implements OnInit {
         console.log(error);
       }
     )
-
-
-    // this.currentUser 
-    // this.httpService.buildUrl('users/me')
-    // .patch().subscribe(
-    //   (res) => {
-      
-    //   }, (error: HttpErrorResponse) {
-    //     // Do something
-    //   }
-    // )
-
-    console.log('update')
   }
 }
