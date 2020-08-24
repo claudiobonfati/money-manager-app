@@ -9,7 +9,6 @@
                 <file-pond #myPond 
                   [options]="pondOptions" 
                   [files]="pondFiles"
-                  (oninit)="pondHandleInit()"
                   (onaddfile)="pondHandleAddFile($event)">
                 </file-pond>
               </div>
@@ -52,12 +51,24 @@
             </div>
           </div>
           <div class="col-12 pb-2">
-            <button class="btn-border-outer-space w-100 font-weight-bold lay-bg-outer-space lay-color-athens-gray">
-              Update!
+            <button class="btn-border-outer-space btn-loader-effect w-100 font-weight-bold lay-bg-outer-space lay-color-athens-gray"
+            [ngClass]="profileBtnStatus">
+              <span class="btn-loader-text">
+                Update!
+              </span>
+              <span class="btn-loader-icon-loading">
+                <i-feather name="loader"></i-feather>
+              </span>
+              <span class="btn-loader-icon-ok">
+                <i-feather name="check"></i-feather>
+              </span>
+              <span class="btn-loader-icon-error">
+                <i-feather name="alert-triangle"></i-feather>
+              </span>
             </button>
           </div>
           <div class="col-12 text-right align-self-end pb-4">
-            <a (click)="httpService.logout()" title="Sign out" class="font-weight-bold text-decoration-none p-2">
+            <a (click)="httpService.logout()" title="Sign out" class="font-weight-bold text-decoration-none p-2 c-pointer">
               <span class="lay-color-aluminium">Sign out</span>
             </a>
           </div>

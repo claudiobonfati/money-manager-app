@@ -17,8 +17,11 @@ export class ProfileComponent implements OnInit {
   public currentUser: ProfileModel;
   public profileForm: FormGroup;
   public profileSent: boolean = false;
+  public profileBtnStatus: string = '';
   public birthdayAnimateShake: boolean = false;
   public currencyAnimateShake: boolean = false;
+  public profileAvatarModified: boolean = false;
+  public profileAvatarEvent: any;
 
   @ViewChild('myPond') myPond: any;
 
@@ -38,12 +41,9 @@ export class ProfileComponent implements OnInit {
     'assets/images/mascot.svg'
   ]
 
-  pondHandleInit() {
-    // console.log('FilePond has initialised', this.myPond);
-  }
-
   pondHandleAddFile(event: any) {
-    // console.log('A file was added', event);
+    this.profileAvatarEvent = event;
+    this.profileAvatarModified = (typeof event.file.source === 'string') ? false : true;
   }
 
   constructor(
@@ -55,12 +55,13 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this.httpService.getLocalUser();
 
-    if (this.currentUser.avatar)
-      this.pondFiles = [ this.env.api_url + this.currentUser.avatar ];
+    if (this.currentUser.avatar) {
+      this.pondFiles = [this.env.api_url + this.currentUser.avatar];
+    }
 
     let birthday: string;
     if (this.currentUser.birthday) {
-      birthday = new Date(this.currentUser.birthday).toISOString().substr(0,10);
+      birthday = new Date(this.currentUser.birthday).toISOString().substr(0, 10);
     }
 
     // Initiate forms
@@ -100,11 +101,49 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  update() {
-    this.profileSent = true;
+  setBtn(status: string) {
+    switch (status) {
+      case '':
+        this.profileBtnStatus = status;
+        break;
+      case 'loading':
+        this.profileBtnStatus = status;
+        break;
+      case 'error':
+        this.profileBtnStatus = 'feedback-error';
+        setTimeout(() => {
+          this.setBtn('');
+        }, 1000);
+        break;
+      case 'ok':
+        this.profileBtnStatus = 'feedback-ok';
+        setTimeout(() => {
+          this.setBtn('');
+        }, 1000);
+        break;
+      default:
+        console.error('Invalid argument for setBtn()');
+    }
+  }
 
-    if (this.profileForm.invalid)
+  getBtnStatus(): string {
+    return this.profileBtnStatus;
+  }
+
+  update(): void {
+    if (this.profileAvatarModified)
+      this.updateAvatar();
+
+    if (this.profileBtnStatus !== '')
       return
+
+    this.profileSent = true;
+    if (this.profileForm.invalid) {
+      this.setBtn('error');
+      return;
+    }
+
+    this.setBtn('loading');
 
     const body = {
       name: this.profileForm.get('name').value,
@@ -115,8 +154,35 @@ export class ProfileComponent implements OnInit {
     .patch(body)
     .subscribe(
       (user: ProfileModel) => {
+        this.setBtn('ok');
         this.httpService.saveLocalUser(user);
       }, (error: HttpErrorResponse) => {
+        this.setBtn('error');
+        console.log(error);
+      }
+    )
+  }
+
+  updateAvatar(): void {
+    this.setBtn('loading');
+    const avatar = this.profileAvatarEvent.file.file;
+
+    if (!avatar) {
+      this.setBtn('error');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('avatar', avatar);
+
+    this.httpService.buildUrl('users/me/avatar')
+    .post(formData)
+    .subscribe(
+      (user: ProfileModel) => {
+        this.setBtn('ok');
+        this.profileAvatarModified = false;
+      }, (error: HttpErrorResponse) => {
+        this.setBtn('error');
         console.log(error);
       }
     )

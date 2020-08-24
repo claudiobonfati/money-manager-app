@@ -12,7 +12,7 @@ import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orien
 import FilePondPluginImageCrop from 'filepond-plugin-image-crop';
 import FilePondPluginImageResize from 'filepond-plugin-image-resize';
 import { FeatherModule } from 'angular-feather';
-import { Edit2, Plus } from 'angular-feather/icons';
+import { Edit2, Plus, Loader, Check, AlertTriangle } from 'angular-feather/icons';
 
 registerPlugin(
   FilePondPluginFileValidateType,
@@ -24,7 +24,10 @@ registerPlugin(
 
 const icons = {
   Edit2,
-  Plus
+  Plus,
+  Loader,
+  Check,
+  AlertTriangle
 };
 
 const routes: Routes = [

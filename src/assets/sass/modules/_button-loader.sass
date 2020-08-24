@@ -1,0 +1,61 @@
+// ==========================================================================
+// MODULES > BUTTON BORDER
+// BOOTSTRAP.SCSS REQUIRED
+// ==========================================================================
+
+[class*="btn-loader-effect"]
+  position: relative
+
+  .btn-loader-text
+    transform: scale(1)
+    @include transition(all 0.2s ease-out)
+
+  [class*="btn-loader-icon-"]
+    position: absolute
+    width: 24px
+    height: 24px
+    left: 50%
+    top: 50%
+    margin-left: -12px
+    margin-top: -12px
+    opacity: 0
+    transform: scale(0)
+    @include transition(all 0.2s ease-out)
+    &.btn-loader-icon-loading > *
+      animation: rotating 2s linear infinite
+
+  &.loading
+    .btn-loader-icon-loading
+      opacity: 1
+      transform: scale(1)
+    .btn-loader-text
+      opacity: 0
+      transform: scale(0)
+  &.feedback-error
+    .btn-loader-icon-error
+      opacity: 1
+      transform: scale(1)
+    .btn-loader-text
+      opacity: 0
+      transform: scale(0)
+  &.feedback-ok
+    .btn-loader-icon-ok
+      opacity: 1
+      transform: scale(1)
+    .btn-loader-text
+      opacity: 0
+      transform: scale(0)
+
+@keyframes rotating
+  from
+    -ms-transform: rotate(0deg)
+    -moz-transform: rotate(0deg)
+    -webkit-transform: rotate(0deg)
+    -o-transform: rotate(0deg)
+    transform: rotate(0deg)
+  to
+    -ms-transform: rotate(360deg)
+    -moz-transform: rotate(360deg)
+    -webkit-transform: rotate(360deg)
+    -o-transform: rotate(360deg)
+    transform: rotate(360deg)
