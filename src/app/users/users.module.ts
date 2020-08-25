@@ -4,7 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'src/app/core/guards/auth.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ProfileComponent } from './profile/profile.component'
+import { ProfileComponent } from './profile/profile.component';
+import { NewTransactionComponent } from './new-transaction/new-transaction.component';
 import { FilePondModule, registerPlugin } from 'ngx-filepond';
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
@@ -45,13 +46,21 @@ const routes: Routes = [
     data: {
       class: "page-profile"
     }
+  }, { 
+    path: 'new-transaction', 
+    component: NewTransactionComponent,
+    canActivate: [AuthGuard],
+    data: {
+      class: "page-new-transaction"
+    }
   }
 ];
 
 @NgModule({
   declarations: [
     DashboardComponent,
-    ProfileComponent
+    ProfileComponent,
+    NewTransactionComponent
   ],
   imports: [
     CommonModule,
