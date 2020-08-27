@@ -1,1 +1,91 @@
-<p>new-transaction works!</p>
+<div id="mm-content-wrapper" class="full-page">
+  <div class="w-100 h-100">
+    <div class="container h-100">
+      <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-12">
+          <div class="tab-transaction"
+          [ngClass]="getTabClass()">
+            <div class="header">
+              <ul>
+                <li class="expense c-pointer" (click)="setTapPosition('expense')">
+                  Expense
+                </li>
+                <li class="income c-pointer" (click)="setTapPosition('income')">
+                  Income
+                </li>
+              </ul>
+              <span class="selector"><span class="inner"></span></span>
+            </div>
+            <div class="content text-white p-3">
+              <div class="row">
+                <form [formGroup]="transactionForm" (ngSubmit)="send()" class="w-100 h-100">
+                  <div class="col-12">
+                    <div class="field-theme-02-dark mb-3" 
+                    [class.filled]="transactionForm.get('title').value.length">
+                      <input type="text" 
+                      formControlName="title"
+                      id="transaction-title">
+                      <label for="transaction-title">Title</label>
+                    </div>
+                    <div class="field-theme-02-dark mb-3" 
+                    [class.filled]="transactionForm.get('recurrence').value.length">
+                      <select 
+                      formControlName="recurrence"
+                      id="transaction-recurrence">
+                        <option value="once">Just one time</option>
+                        <option value="monthly">Monthly</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="every_two_weeks">Every two weeks</option>
+                      </select>
+                      <label for="transaction-recurrence">Recurrence</label>
+                    </div>
+                    <div class="field-theme-02-dark mb-3"
+                      [class.filled]="transactionForm.get('dayDue').value.length"
+                      [class.is-invalid]="transactionSent && transactionForm.controls.dayDue.errors">
+                      <input [type]="getTransactionDueDayType()" 
+                      onfocus="(this.type='date')"
+                      onblur="if(!this.value)this.type='text'"
+                      formControlName="dayDue"
+                      id="transaction-dayDue">
+                      <label for="transaction-dayDue">Due Date</label>
+                    </div>
+                    <div class="field-price-theme-01-dark mb-3"
+                      [class.filled]="transactionForm.get('price').value.length"
+                      [class.is-invalid]="transactionSent && transactionForm.controls.price.errors">
+                      <span class="btn left noselect" (click)="priceAdd(-5)">
+                        -
+                      </span>
+                      <input type="text"
+                      currencyMask
+                      formControlName="price">
+                      <span class="btn right noselect" (click)="priceAdd(5)">
+                        +
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <button class="btn-border-athens-gray btn-loader-effect w-100 font-weight-bold lay-bg-athens-gray lay-color-outer-space"
+                    [ngClass]="transactionBtnStatus">
+                      <span class="btn-loader-text">
+                        Done
+                      </span>
+                      <span class="btn-loader-icon-loading">
+                        <i-feather name="loader"></i-feather>
+                      </span>
+                      <span class="btn-loader-icon-ok">
+                        <i-feather name="check"></i-feather>
+                      </span>
+                      <span class="btn-loader-icon-error">
+                        <i-feather name="alert-triangle"></i-feather>
+                      </span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

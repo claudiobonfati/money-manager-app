@@ -14,6 +14,7 @@ import FilePondPluginImageCrop from 'filepond-plugin-image-crop';
 import FilePondPluginImageResize from 'filepond-plugin-image-resize';
 import { FeatherModule } from 'angular-feather';
 import { Edit2, Plus, Loader, Check, AlertTriangle } from 'angular-feather/icons';
+import { CurrencyMaskModule } from "ng2-currency-mask";
 
 registerPlugin(
   FilePondPluginFileValidateType,
@@ -68,7 +69,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forRoot(routes),
     FeatherModule.pick(icons),
-    FilePondModule
+    FilePondModule,
+    CurrencyMaskModule
   ]
 })
 export class UsersModule { }

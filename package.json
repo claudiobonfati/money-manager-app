@@ -28,6 +28,7 @@
     "filepond-plugin-image-exif-orientation": "^1.0.9",
     "filepond-plugin-image-preview": "^4.6.4",
     "filepond-plugin-image-resize": "^2.0.7",
+    "ng2-currency-mask": "^9.0.2",
     "ngx-filepond": "^5.0.1",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",

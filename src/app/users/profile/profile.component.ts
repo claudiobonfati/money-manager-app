@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 import { environment } from 'src/environments/environment';
 import { HttpService } from 'src/app/core/services/http.service';
 import { ProfileModel } from 'src/app/core/models/profile.model';
@@ -47,7 +46,7 @@ export class ProfileComponent implements OnInit {
   }
 
   constructor(
-    private formBuilder: FormBuilder,
+    public formBuilder: FormBuilder,
     public httpService: HttpService,
     public helperService: HelperService
   ) { }
