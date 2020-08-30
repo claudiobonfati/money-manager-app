@@ -109,10 +109,6 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  ngAfterViewInit() {
-
-  }
-
   passAdd(value1, value2) {
     let key = [value1, value2];
     this.password.push(key);
