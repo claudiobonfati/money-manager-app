@@ -4,7 +4,8 @@
       <div class="container h-100">
         <div class="row h-100 justify-content-center">
           <div class="col-12 text-center">
-            <div class="profile-pick-wrapper">
+            <div class="profile-pick-wrapper"
+            [class.animate-shake]="nameAnimateShake">
               <div class="profile-pick">
                 <file-pond #myPond 
                   [options]="pondOptions" 

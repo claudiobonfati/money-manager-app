@@ -17,8 +17,8 @@ export class ProfileComponent implements OnInit {
   public profileForm: FormGroup;
   public profileSent: boolean = false;
   public profileBtnStatus: string = '';
+  public nameAnimateShake: boolean = false;
   public birthdayAnimateShake: boolean = false;
-  public currencyAnimateShake: boolean = false;
   public profileAvatarModified: boolean = false;
   public profileAvatarEvent: any;
   public pondFiles: any = ['assets/images/mascot.svg'];
@@ -126,6 +126,19 @@ export class ProfileComponent implements OnInit {
     return this.profileBtnStatus;
   }
 
+  applyShakeAnimation(target: string): void {
+    const tgt = target + 'AnimateShake';
+
+    if (this[tgt] === undefined)
+      return
+
+    this[tgt] = true;
+
+    setTimeout(() => {
+      if (this[tgt]) this[tgt] = false;
+    }, 800)
+  }
+
   update(): void {
     if (this.profileAvatarModified)
       this.updateAvatar();
@@ -135,10 +148,16 @@ export class ProfileComponent implements OnInit {
 
     this.profileSent = true;
     if (this.profileForm.invalid) {
+      if (this.profileForm.get('name').status === "INVALID") {
+        this.applyShakeAnimation('name');
+      }
+      if (this.profileForm.get('birthday').status === "INVALID") {
+        this.applyShakeAnimation('birthday');
+      }
+
       this.setBtn('error');
       return;
     }
-
     this.setBtn('loading');
 
     const body = {
