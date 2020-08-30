@@ -21,6 +21,7 @@ export class ProfileComponent implements OnInit {
   public currencyAnimateShake: boolean = false;
   public profileAvatarModified: boolean = false;
   public profileAvatarEvent: any;
+  public pondFiles: any = ['assets/images/mascot.svg'];
 
   @ViewChild('myPond') myPond: any;
 
@@ -35,10 +36,6 @@ export class ProfileComponent implements OnInit {
     styleButtonRemoveItemPosition: 'left bottom',
     styleButtonProcessItemPosition: 'right bottom'
   }
-
-  pondFiles = [
-    'assets/images/mascot.svg'
-  ]
 
   pondHandleAddFile(event: any) {
     this.profileAvatarEvent = event;

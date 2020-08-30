@@ -3,7 +3,7 @@
     <div class="w-100 h-100">
       <div class="container h-100">
         <div class="row h-100 justify-content-center">
-          <div class="col-12 text-center pt-5">
+          <div class="col-12 text-center">
             <div class="profile-pick-wrapper">
               <div class="profile-pick">
                 <file-pond #myPond 
@@ -39,7 +39,7 @@
               <label for="profile-email">Email</label>
             </div>
             <div class="field-theme-02-light mb-3"
-              [class.filled]="profileForm.get('birthday').value.length"
+              [class.filled]="profileForm.get('birthday').value && profileForm.get('birthday').value.length"
               [class.is-invalid]="profileSent && profileForm.controls.birthday.errors"
               [class.animate-shake]="birthdayAnimateShake">
               <input [type]="getBirthdayInputType()" 
@@ -67,7 +67,7 @@
               </span>
             </button>
           </div>
-          <div class="col-12 align-self-end pb-4">
+          <div class="col-12 align-self-end">
             <a (click)="httpService.logout()" title="Sign out" class="font-weight-bold text-decoration-none p-2 c-pointer">
               <span class="lay-color-aluminium">Sign out</span>
             </a>
