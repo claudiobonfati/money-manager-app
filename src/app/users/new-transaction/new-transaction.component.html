@@ -2,7 +2,7 @@
   <div class="w-100 h-100">
     <div class="container h-100">
       <div class="row h-100 justify-content-center align-items-center">
-        <div class="col-12">
+        <div class="col-12 h-100">
           <div class="tab-transaction"
           [ngClass]="getTabClass()">
             <div class="header">
@@ -16,22 +16,25 @@
               </ul>
               <span class="selector"><span class="inner"></span></span>
             </div>
-            <div class="content text-white p-3">
-              <div class="row">
-                <form [formGroup]="transactionForm" (ngSubmit)="send()" class="w-100 h-100">
+            <div class="content text-white px-3 pt-3">
+              <form [formGroup]="transactionForm" (ngSubmit)="send()" class="w-100 h-100">
+                <div class="row h-100">
                   <div class="col-12">
                     <div class="field-theme-02-dark mb-3" 
-                    [class.filled]="transactionForm.get('title').value.length">
+                    [class.filled]="transactionForm.get('title').value && transactionForm.get('title').value.length"
+                    [class.animate-shake]="titleAnimateShake">
                       <input type="text" 
                       formControlName="title"
                       id="transaction-title">
                       <label for="transaction-title">Title</label>
                     </div>
                     <div class="field-theme-02-dark mb-3" 
-                    [class.filled]="transactionForm.get('recurrence').value.length">
+                    [class.filled]="transactionForm.get('recurrence').value && transactionForm.get('recurrence').value.length"
+                    [class.animate-shake]="recurrenceAnimateShake">
                       <select 
                       formControlName="recurrence"
-                      id="transaction-recurrence">
+                      id="transaction-recurrence"
+                      (change)="onRecurrenceChange()">
                         <option value="once">Just one time</option>
                         <option value="monthly">Monthly</option>
                         <option value="weekly">Weekly</option>
@@ -40,18 +43,43 @@
                       <label for="transaction-recurrence">Recurrence</label>
                     </div>
                     <div class="field-theme-02-dark mb-3"
-                      [class.filled]="transactionForm.get('dayDue').value.length"
-                      [class.is-invalid]="transactionSent && transactionForm.controls.dayDue.errors">
-                      <input [type]="getTransactionDueDayType()" 
-                      onfocus="(this.type='date')"
-                      onblur="if(!this.value)this.type='text'"
+                    *ngIf="transactionForm.get('recurrence').value !== 'once'" 
+                    [class.filled]="transactionForm.get('instalments').value"
+                    [class.animate-shake]="instalmentsAnimateShake">
+                      <input type="number" 
+                      pattern="[0-9]*"
+                      inputmode="numeric" 
+                      formControlName="instalments"
+                      id="transaction-title"
+                      (keyup)="onInstalmentsChange()">
+                      <label for="transaction-instalments">Instalments</label>
+                    </div>
+                    <div class="field-theme-02-dark mb-3"
+                      [class.filled]="transactionForm.get('dayDue').value && transactionForm.get('dayDue').value.length"
+                      [class.is-invalid]="transactionSent && transactionForm.controls.dayDue.errors"
+                      [class.animate-shake]="dayDueAnimateShake">
+                      <input type="date"
+                      *ngIf="transactionForm.get('recurrence').value !== 'weekly' && transactionForm.get('recurrence').value !== 'every_two_weeks'"
                       formControlName="dayDue"
                       id="transaction-dayDue">
+                      <select 
+                      *ngIf="transactionForm.get('recurrence').value === 'weekly' || transactionForm.get('recurrence').value === 'every_two_weeks'"
+                      formControlName="dayDue"
+                      id="transaction-dayDue">
+                        <option value="1">Sunday</option>
+                        <option value="2">Monday</option>
+                        <option value="3">Tuesday</option>
+                        <option value="4">Wednesday</option>
+                        <option value="5">Thursday</option>
+                        <option value="6">Friday</option>
+                        <option value="7">Saturday</option>
+                      </select>
                       <label for="transaction-dayDue">Due Date</label>
                     </div>
                     <div class="field-price-theme-01-dark mb-3"
-                      [class.filled]="transactionForm.get('price').value.length"
-                      [class.is-invalid]="transactionSent && transactionForm.controls.price.errors">
+                      [class.filled]="transactionForm.get('price').value && transactionForm.get('price').value.length"
+                      [class.is-invalid]="transactionSent && transactionForm.controls.price.errors"
+                      [class.animate-shake]="priceAnimateShake">
                       <span class="btn left noselect" (click)="priceAdd(-5)">
                         -
                       </span>
@@ -63,7 +91,7 @@
                       </span>
                     </div>
                   </div>
-                  <div class="col-12">
+                  <div class="col-12 align-self-end pb-3">
                     <button class="btn-border-athens-gray btn-loader-effect w-100 font-weight-bold lay-bg-athens-gray lay-color-outer-space"
                     [ngClass]="transactionBtnStatus">
                       <span class="btn-loader-text">
@@ -80,8 +108,8 @@
                       </span>
                     </button>
                   </div>
-                </form>
-              </div>
+                </div>
+              </form>
             </div>
           </div>
         </div>

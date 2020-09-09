@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
   public currentUser: any;
   public currentStep: string = '';
   public loginMode: string = '';
+  public loginBtnStatus: string = '';
 
   public emailForm: FormGroup;
   public emailSent: boolean = false;
@@ -177,14 +178,42 @@ export class LoginComponent implements OnInit {
     }, 800)
   }
 
+  setBtn(status: string) {
+    switch (status) {
+      case '':
+        this.loginBtnStatus = status;
+        break;
+      case 'loading':
+        this.loginBtnStatus = status;
+        break;
+      case 'error':
+        this.loginBtnStatus = 'feedback-error';
+        setTimeout(() => {
+          this.setBtn('');
+        }, 1000);
+        break;
+      case 'ok':
+        this.loginBtnStatus = 'feedback-ok';
+        setTimeout(() => {
+          this.setBtn('');
+        }, 1000);
+        break;
+      default:
+        console.error('Invalid argument for setBtn()');
+    }
+  }
+
   login(): void {
     this.passwordSent = true;
 
     if (this.passwordForm.invalid) {
       this.applyShakeAnimation('password');
+      this.setBtn('error');
       return;
     }
     
+    this.setBtn('loading');
+
     if (this.loginMode === 'normal'){
       const email = this.emailForm.controls['email'].value;
       const password = this.passwordForm.controls['password'].value;
@@ -193,11 +222,15 @@ export class LoginComponent implements OnInit {
       .post({ email, password })
       .subscribe(
         (data: UserModel) => {
-          this.httpService.createLocalUser(data);
-          this.router.navigate(['dashboard']);
+          this.setBtn('ok');
+
+          setTimeout(() => {
+            this.httpService.createLocalUser(data);
+            this.router.navigate(['dashboard']);
+          }, 600);
         }, (error: HttpErrorResponse) => {
-          if(error.status === 400)
-            this.applyShakeAnimation('password');
+          this.setBtn('error');
+          this.applyShakeAnimation('password');
         }  
       )
     } else {
@@ -208,11 +241,15 @@ export class LoginComponent implements OnInit {
       .post({ _id: id, password })
       .subscribe(
         (data: UserModel) => {
-          this.httpService.createLocalUser(data);
-          this.router.navigate(['./dashboard']);
+          this.setBtn('ok');
+
+          setTimeout(() => {
+            this.httpService.createLocalUser(data);
+            this.router.navigate(['dashboard']);
+          }, 600);
         }, (error: HttpErrorResponse) => {
-          if(error.status === 400)
-            this.applyShakeAnimation('password');
+          this.setBtn('error');
+          this.applyShakeAnimation('password');
         }
       )
     }

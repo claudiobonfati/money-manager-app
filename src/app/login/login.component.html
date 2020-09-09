@@ -80,9 +80,21 @@
                   </div>
                 </div>
               </div>
-              <button class="btn-border-athens-gray w-100 font-weight-bold lay-color-outer-space lay-bg-athens-gray c-pointer"
+              <button class="btn-border-athens-gray btn-loader-effect w-100 font-weight-bold lay-color-outer-space lay-bg-athens-gray c-pointer"
+              [ngClass]="loginBtnStatus"
               [class.mt-2]="loginMode === 'easy'">
-                Done!
+                <span class="btn-loader-text">
+                  Done!
+                </span>
+                <span class="btn-loader-icon-loading">
+                  <i-feather name="loader"></i-feather>
+                </span>
+                <span class="btn-loader-icon-ok">
+                  <i-feather name="check"></i-feather>
+                </span>
+                <span class="btn-loader-icon-error">
+                  <i-feather name="alert-triangle"></i-feather>
+                </span>
               </button>
             </form>
           </div>

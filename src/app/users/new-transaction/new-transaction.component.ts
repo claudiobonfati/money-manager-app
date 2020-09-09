@@ -14,6 +14,12 @@ export class NewTransactionComponent implements OnInit {
   public transactionSent: boolean = false;
   public transactionBtnStatus: string = '';
   public transactionType: string = 'expense';
+  public titleAnimateShake: boolean = false;
+  public recurrenceAnimateShake: boolean = false;
+  public instalmentsAnimateShake: boolean = false;
+  public dayDueAnimateShake: boolean = false;
+  public priceAnimateShake: boolean = false;
+  public todayDate: string;
 
   constructor(
     public formBuilder: FormBuilder,
@@ -22,6 +28,15 @@ export class NewTransactionComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // Get current date
+    let today = new Date();
+    let d = today.getDate();
+    let m: any = today.getMonth() + 1;
+    m = (m < 10) ? '0'+m : m;
+    let y = today.getFullYear();
+
+    this.todayDate = `${y}-${m}-${d}`;
+
     // Initiate form
     this.transactionForm = this.formBuilder.group({
       title: [
@@ -37,10 +52,14 @@ export class NewTransactionComponent implements OnInit {
         ]
       ],
       instalments: [
-        '1'
+        '',
+        [
+          Validators.pattern("^[0-9]*$"),
+          Validators.maxLength(2)
+        ]
       ],
       dayDue: [
-        'Today',
+        this.todayDate,
         [
           Validators.required
         ]
@@ -70,6 +89,28 @@ export class NewTransactionComponent implements OnInit {
       return 'date';
     } else {
       return 'text';
+    }
+  }
+
+  onRecurrenceChange(): void {
+    let recurrence = this.transactionForm.get('recurrence').value;
+
+    if (recurrence === 'weekly' || recurrence === 'every_two_weeks') {
+      this.transactionForm.get('dayDue').setValue('2');
+    } else {
+      this.transactionForm.get('dayDue').setValue(this.todayDate);
+    }
+  }
+
+  onInstalmentsChange(): void {
+    let instalments = this.transactionForm.get('instalments').value;
+
+    if (instalments > 99) {
+      this.applyShakeAnimation(instalments);
+      this.transactionForm.get('instalments').setValue(99);
+    } else if (instalments < 1) {
+      this.applyShakeAnimation(instalments);
+      this.transactionForm.get('instalments').setValue(1);
     }
   }
 
@@ -114,6 +155,18 @@ export class NewTransactionComponent implements OnInit {
     }
   }
 
+  applyShakeAnimation(target: string): void {
+    const tgt = target + 'AnimateShake';
+
+    if (this[tgt] === undefined)
+      return
+
+    this[tgt] = true;
+
+    setTimeout(() => {
+      if (this[tgt]) this[tgt] = false;
+    }, 800)
+  }
 
   send(): void {
     if (this.transactionBtnStatus !== '')
@@ -122,6 +175,34 @@ export class NewTransactionComponent implements OnInit {
     this.transactionSent = true;
 
     if (this.transactionForm.invalid) {
+      if (this.transactionForm.get('title').status === "INVALID") {
+        this.applyShakeAnimation('title');
+      }
+      if (this.transactionForm.get('recurrence').status === "INVALID") {
+        this.applyShakeAnimation('recurrence');
+      }
+      if (this.transactionForm.get('dayDue').status === "INVALID") {
+        this.applyShakeAnimation('dayDue');
+      }
+      if (this.transactionForm.get('price').status === "INVALID") {
+        this.applyShakeAnimation('price');
+      }
+
+      this.setBtn('error');
+      return;
+    }
+
+    if (this.transactionForm.get('recurrence').value === 'weekly' || this.transactionForm.get('recurrence').value === 'every_two_weeks') {
+      if (!this.transactionForm.get('instalments').value ||
+          this.transactionForm.get('instalments').value < 2) {
+        this.applyShakeAnimation('instalments');
+        this.setBtn('error');
+        return;
+      }
+    }
+    
+    if (this.transactionForm.get('price').value === 0) {
+      this.applyShakeAnimation('price');
       this.setBtn('error');
       return;
     }
@@ -137,17 +218,19 @@ export class NewTransactionComponent implements OnInit {
       price: this.transactionForm.get('price').value
     }
 
-    console.log(body)
-
     this.httpService.buildUrl('contracts')
     .post(body)
     .subscribe(
       (transaction) => {
-        console.log(transaction)
-        this.setBtn('ok');
+        setTimeout(() => {
+          this.setBtn('ok');
+          this.transactionForm.reset();
+        }, 1000)
       }, (error: HttpErrorResponse) => {
-        this.setBtn('error');
         console.log(error);
+        setTimeout(() => {
+          this.setBtn('error');
+        }, 1000)
       }
     )
   }

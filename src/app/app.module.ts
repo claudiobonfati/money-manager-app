@@ -21,7 +21,7 @@ import { MenuComponent } from './core/components/menu/menu.component';
 import { environment } from '../environments/environment';
 
 import { FeatherModule } from 'angular-feather';
-import { Home, Plus, User, Mail, Key, Delete } from 'angular-feather/icons';
+import { Home, Plus, User, Mail, Key, Delete, Loader, Check, AlertTriangle } from 'angular-feather/icons';
 
 const icons = {
   Home,
@@ -29,7 +29,10 @@ const icons = {
   User,
   Mail,
   Key,
-  Delete
+  Delete,
+  Loader,
+  Check,
+  AlertTriangle
 };
 
 const appRoutes: Routes = [
