@@ -7,7 +7,7 @@
   background-color: map-get($color-config, "outer-space")
 
 #mm-bg-elements
-  #bg-up  
+  #bg-up
     position: absolute
     top: 0
     left: 0
@@ -27,12 +27,12 @@
   &.page-profile,
   &.page-new-transaction
     #mm-bg-elements
-      #bg-up  
+      #bg-up
         transform: translateY(0%)
     #mm-content-wrapper
       height: calc(100% - 60px)
       padding-top: 20px
-      padding-bottom: 20px 
+      padding-bottom: 20px
   #mm-content-wrapper
     height: 100%
     overflow-y: scroll
@@ -68,7 +68,7 @@
     border-radius: 35%
     position: relative
     overflow: hidden
-    img 
+    img
       position: absolute
       width: 100%
       height: 100%
@@ -162,7 +162,7 @@ i-feather svg
     .selector
       width: 50%
       height: var(--height)
-      position: absolute 
+      position: absolute
       background-color: map-get($color-config, "outer-space")
       left: 0
       z-index: 1
@@ -175,7 +175,7 @@ i-feather svg
         display: block
         width: 100%
         height: 100%
-        position: absolute 
+        position: absolute
         left: 0
         top: 0
         &::after,
@@ -251,3 +251,17 @@ i-feather svg
   -moz-user-select: none
   -ms-user-select: none
   user-select: none
+
++media-breakpoint-down(xl)
+
+
++media-breakpoint-down(lg)
+  #mm-wrapper-router
+    .rule-x,
+    .rule-y
+      display: none
+
+
++media-breakpoint-down(md)
+
++media-breakpoint-down(sm)

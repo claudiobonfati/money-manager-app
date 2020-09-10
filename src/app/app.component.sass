@@ -4,29 +4,157 @@
   margin: 0 auto
   position: relative
   background-color: #FFFFFF
+  overflow: hidden
+  display: -ms-flexbox
+  display: -webkit-flex
+  display: flex
+  -webkit-flex-direction: row
+  -ms-flex-direction: row
+  flex-direction: row
+  -webkit-flex-wrap: nowrap
+  -ms-flex-wrap: nowrap
+  flex-wrap: nowrap
+  -webkit-justify-content: center
+  -ms-flex-pack: center
+  justify-content: center
+  -webkit-align-content: stretch
+  -ms-flex-line-pack: stretch
+  align-content: stretch
+  -webkit-align-items: center
+  -ms-flex-align: center
+  align-items: center
 
 #mm-wrapper-router
   width: 100%
   height: 100%
   margin: 0 auto
   position: relative
+  transition: width .2s ease-out, height .2s ease-out,
   #mm-wrapper-inner
     display: block
     position: relative
     width: 100%
     height: 100%
     overflow: hidden
+
   &.centralized
-    position: absolute
-    left: 50%
-    top: 50%
-    width: 312px
-    height: 555px
-    margin-top: -277px
-    margin-left: -156px
+    &[data-width="200"]
+      width: 200px
+    &[data-width="300"]
+      width: 300px
+    &[data-width="400"]
+      width: 400px
+    &[data-width="500"]
+      width: 500px
+    &[data-width="600"]
+      width: 600px
+
+    &[data-height="400"]
+      height: 400px
+    &[data-height="500"]
+      height: 500px
+    &[data-height="600"]
+      height: 600px
+    &[data-height="700"]
+      height: 700px
+    &[data-height="800"]
+      height: 800px
+
+    .rule-x,
+    .rule-y
+      display: block
+      content: ""
+      position: absolute
+      .number
+        color: #808080
+        font-size: 10px
+        font-weight: bold
+
+    .rule-x
+      width: 2000px
+      height: 16px
+      top: -16px
+      left: 0
+      background-image: url('/assets/images/rule-x.svg')
+      background-size: 50px
+      border-bottom: 1px solid #808080
+      background-repeat: repeat-x
+      .number
+        position: relative
+        display: block
+        float: left
+        width: 100px
+        height: 100%
+        padding-left: 100px
+        line-height: 1
+        z-index: 1
+        span
+          display: block
+          width: 25px
+          padding-left: 3px
+        &.c-pointer
+          &::before
+            display: block
+            position: absolute
+            content: " "
+            width: 0
+            height: 0
+            border-left: 5.5px solid transparent
+            border-right: 5.5px solid transparent
+            border-top: 11px solid #808080
+            left: 95px
+            top: -15px
+            transition: all .2s ease-out
+            opacity: 0
+          &:hover
+            &::before
+              opacity: 1
+              transform: translateY(5px)
+
+    .rule-y
+      width: 16px
+      height: 2000px
+      left: -16px
+      top: 0
+      background-image: url('/assets/images/rule-y.svg')
+      background-size: auto 50px
+      border-right: 1px solid #808080
+      background-repeat: repeat-y
+      .number
+        position: relative
+        display: block
+        float: left
+        height: 100px
+        width: 100%
+        padding-top: 100px
+        z-index: 1
+        span
+          display: block
+          width: 25px
+          transform: rotate(-90deg)
+          margin-left: -8px
+        &.c-pointer
+          &::before
+            display: block
+            position: absolute
+            content: " "
+            width: 0
+            height: 0
+            border-top: 5.5px solid transparent
+            border-left: 11px solid #808080
+            border-bottom: 5.5px solid transparent
+            top: 95px
+            left: -15px
+            transition: all .2s ease-out
+            opacity: 0
+          &:hover
+            &::before
+              opacity: 1
+              transform: translateX(5px)
+
     #mm-wrapper-inner
-      border-radius: 30px
       border: 5px solid #000
       -webkit-box-shadow: 20px 20px 20px -2px rgba(0, 0, 0, .2)
       -moz-box-shadow: 20px 20px 20px -2px rgba(0, 0, 0, .2)
       box-shadow: 20px 20px 20px -2px rgba(0, 0, 0, .2)
+

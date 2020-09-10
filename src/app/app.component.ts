@@ -1,10 +1,10 @@
 import { Component, HostListener } from '@angular/core';
 import { HelperService } from './core/services/helper.service';
 import { environment } from '../environments/environment';
-import { 
-  RouterOutlet, 
-  Router, 
-  Event,  
+import {
+  RouterOutlet,
+  Router,
+  Event,
   NavigationEnd,
   NavigationStart,
 } from '@angular/router';
@@ -39,7 +39,7 @@ import { trigger, style, group, query, animate, transition } from '@angular/anim
               ':leave',
               [
                 animate(
-                  '.2s ease-out', 
+                  '.2s ease-out',
                   style({ opacity: 0 })
                 )
               ],
@@ -54,14 +54,14 @@ import { trigger, style, group, query, animate, transition } from '@angular/anim
         transition(
           ':enter', [
             style({ opacity: 0, transform: 'translateY(-250px)' }),
-            animate('.2s ease-out', 
+            animate('.2s ease-out',
                     style({ opacity: 1, transform: 'translateY(0px)' }))
           ]
         ),
         transition(
           ':leave', [
             style({  opacity: 1, transform: 'translateY(0px)' }),
-            animate('.2s ease-out', 
+            animate('.2s ease-out',
                     style({ opacity: 0, transform: 'translateY(-250px)' }))
           ]
         )
@@ -76,6 +76,10 @@ export class AppComponent {
   public centralized: boolean = true;
   public env = environment;
   public show_content: boolean = false;
+  public dimension: any = {
+    x: 300,
+    y: 600,
+  }
 
   constructor(
     public helperService: HelperService,
@@ -94,7 +98,7 @@ export class AppComponent {
   }
 
   updateOrientation(): void {
-    if (window.innerWidth > 600 && 
+    if (window.innerWidth > 600 &&
         window.innerWidth > window.innerHeight) {
       this.orientation = 'vertical';
       this.centralized = true;
@@ -110,5 +114,9 @@ export class AppComponent {
 
   prepareRoute(outlet: RouterOutlet) {
     return outlet.activatedRouteData['class'];
+  }
+
+  setDimension(axis: any, value: any): void {
+    this.dimension[axis] = value;
   }
 }
