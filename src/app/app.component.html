@@ -6,28 +6,28 @@ ontouchstart="" >
   [attr.data-height]="dimension.y"
 	[ngClass]="centralized ? 'centralized' : ''">
     <span class="rule-x">
-      <span class="number"><span>100</span></span>
-      <span class="number c-pointer" (click)="setDimension('x', 200)"><span>200</span></span>
-      <span class="number c-pointer" (click)="setDimension('x', 300)"><span>300</span></span>
-      <span class="number c-pointer" (click)="setDimension('x', 400)"><span>400</span></span>
-      <span class="number c-pointer" (click)="setDimension('x', 500)"><span>500</span></span>
-      <span class="number c-pointer" (click)="setDimension('x', 600)"><span>600</span></span>
-      <span class="number"><span>700</span></span>
-      <span class="number"><span>800</span></span>
-      <span class="number"><span>900</span></span>
-      <span class="number"><span>1000</span></span>
+      <span class="number noselect"><span>100</span></span>
+      <span class="number noselect c-pointer" (click)="setDimension('x', 200)"><span>200</span></span>
+      <span class="number noselect c-pointer" (click)="setDimension('x', 300)"><span>300</span></span>
+      <span class="number noselect c-pointer" (click)="setDimension('x', 400)"><span>400</span></span>
+      <span class="number noselect c-pointer" (click)="setDimension('x', 500)"><span>500</span></span>
+      <span class="number noselect c-pointer" (click)="setDimension('x', 600)"><span>600</span></span>
+      <span class="number noselect"><span>700</span></span>
+      <span class="number noselect"><span>800</span></span>
+      <span class="number noselect"><span>900</span></span>
+      <span class="number noselect"><span>1000</span></span>
     </span>
     <span class="rule-y">
-      <span class="number"><span>100</span></span>
-      <span class="number"><span>200</span></span>
-      <span class="number"><span>300</span></span>
-      <span class="number c-pointer" (click)="setDimension('y', 400)"><span>400</span></span>
-      <span class="number c-pointer" (click)="setDimension('y', 500)"><span>500</span></span>
-      <span class="number c-pointer" (click)="setDimension('y', 600)"><span>600</span></span>
-      <span class="number c-pointer" (click)="setDimension('y', 700)"><span>700</span></span>
-      <span class="number c-pointer" (click)="setDimension('y', 800)"><span>800</span></span>
-      <span class="number"><span>900</span></span>
-      <span class="number"><span>1000</span></span>
+      <span class="number noselect"><span>100</span></span>
+      <span class="number noselect"><span>200</span></span>
+      <span class="number noselect"><span>300</span></span>
+      <span class="number noselect c-pointer" (click)="setDimension('y', 400)"><span>400</span></span>
+      <span class="number noselect c-pointer" (click)="setDimension('y', 500)"><span>500</span></span>
+      <span class="number noselect c-pointer" (click)="setDimension('y', 600)"><span>600</span></span>
+      <span class="number noselect c-pointer" (click)="setDimension('y', 700)"><span>700</span></span>
+      <span class="number noselect c-pointer" (click)="setDimension('y', 800)"><span>800</span></span>
+      <span class="number noselect"><span>900</span></span>
+      <span class="number noselect"><span>1000</span></span>
     </span>
 		<div id="mm-wrapper-inner" [ngClass]="getRouteClass(routerOutlet)" class="box-general-content">
 			<div id="mm-bg-elements">
@@ -42,4 +42,9 @@ ontouchstart="" >
 			</div>
 		</div>
 	</div>
+  <div class="credit-bottom-left noselect">
+    coded with <span role="img" aria-label="coffee">☕</span> by
+    <strong><a href="https://www.linkedin.com/in/claudiobonfati/" target="_blank" class="lay-color-outer-space text-decoration-underline" title="LinkedIn Claudio Bonfati">Claudio Bonfati</a></strong>
+  </div>
+  <div class="credit-bottom-right noselect">design inspired by <strong><a href="https://www.linkedin.com/in/afipmaulana/" target="_blank" class="lay-color-outer-space text-decoration-underline" title="LinkedIn Afif Maulana">Afif Maulana</a></strong></div>
 </div>

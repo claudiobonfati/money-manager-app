@@ -21,39 +21,42 @@ hr
   margin: 10px 0 30px
   height: 0
 
+.text-decoration-underline
+  text-decoration: underline
+
 @each $color in $color-config
-  .lay-color-#{nth($color, 1)}, 
-  .lay-color-#{nth($color, 1)}:hover, 
-  .lay-color-#{nth($color, 1)}:active , 
-  .lay-color-#{nth($color, 1)}:focus , 
+  .lay-color-#{nth($color, 1)},
+  .lay-color-#{nth($color, 1)}:hover,
+  .lay-color-#{nth($color, 1)}:active ,
+  .lay-color-#{nth($color, 1)}:focus ,
   .lay-color-#{nth($color, 1)}:visited,
-  .lay-color-#{nth($color, 1)} *, 
-  .lay-color-#{nth($color, 1)} *:hover, 
-  .lay-color-#{nth($color, 1)} *:active , 
-  .lay-color-#{nth($color, 1)} *:focus , 
+  .lay-color-#{nth($color, 1)} *,
+  .lay-color-#{nth($color, 1)} *:hover,
+  .lay-color-#{nth($color, 1)} *:active ,
+  .lay-color-#{nth($color, 1)} *:focus ,
   .lay-color-#{nth($color, 1)} *:visited
     color: nth($color, 2)
 
-@each $value in $fontsize-config 
+@each $value in $fontsize-config
   .font-#{nth($value, 1)}
     font-size: nth($value, 2)
 
 +media-breakpoint-down(xl)
-  @each $value in $fontsize-config 
+  @each $value in $fontsize-config
     .font-#{nth($value, 1)}
       font-size: nth($value, 3)
 
 +media-breakpoint-down(lg)
-  @each $value in $fontsize-config 
+  @each $value in $fontsize-config
     .font-#{nth($value, 1)}
       font-size: nth($value, 4)
 
 +media-breakpoint-down(md)
-  @each $value in $fontsize-config 
+  @each $value in $fontsize-config
     .font-#{nth($value, 1)}
       font-size: nth($value, 5)
 
 +media-breakpoint-down(sm)
-  @each $value in $fontsize-config 
+  @each $value in $fontsize-config
     .font-#{nth($value, 1)}
       font-size: nth($value, 6)
