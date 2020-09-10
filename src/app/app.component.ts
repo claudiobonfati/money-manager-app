@@ -72,7 +72,6 @@ import { trigger, style, group, query, animate, transition } from '@angular/anim
 export class AppComponent {
   public innerWidth: any;
   public innerHeight: any;
-  public orientation: string = '';
   public centralized: boolean = true;
   public env = environment;
   public show_content: boolean = false;
@@ -98,13 +97,11 @@ export class AppComponent {
   }
 
   updateOrientation(): void {
-    if (window.innerWidth > 600 &&
+    if (window.innerWidth > 991 &&
         window.innerWidth > window.innerHeight) {
-      this.orientation = 'vertical';
       this.centralized = true;
     } else {
       this.centralized = false;
-      this.orientation = 'vertical';
     }
   }
 
