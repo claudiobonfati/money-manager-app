@@ -123,7 +123,7 @@ export class NewTransactionComponent implements OnInit {
     } else {
       result = current + value;
     }
-    
+
     if (result < 0)
       result = 0;
 
@@ -200,7 +200,7 @@ export class NewTransactionComponent implements OnInit {
         return;
       }
     }
-    
+
     if (this.transactionForm.get('price').value === 0) {
       this.applyShakeAnimation('price');
       this.setBtn('error');
@@ -213,7 +213,7 @@ export class NewTransactionComponent implements OnInit {
       type: this.transactionType,
       title: this.transactionForm.get('title').value,
       recurrence: this.transactionForm.get('recurrence').value,
-      instalments: this.transactionForm.get('instalments').value,
+      instalments: (this.transactionForm.get('recurrence').value === 'once' ? 1 : this.transactionForm.get('instalments').value),
       dayDue: 0,
       price: this.transactionForm.get('price').value
     }
