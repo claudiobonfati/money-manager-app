@@ -2,3 +2,240 @@
   position: absolute
   width: 100%
   height: 100%
+
+.dashboard-wrapper
+  .box-header,
+  .box-months,
+  .box-values,
+  .box-transactions
+    // outline: 1px solid red
+
+.dashboard-wrapper
+  height: 100%
+  display: -ms-flexbox
+  display: -webkit-flex
+  display: flex
+  -webkit-flex-direction: column
+  -ms-flex-direction: column
+  flex-direction: column
+  -webkit-flex-wrap: nowrap
+  -ms-flex-wrap: nowrap
+  flex-wrap: nowrap
+  -webkit-justify-content: flex-start
+  -ms-flex-pack: start
+  justify-content: flex-start
+  -webkit-align-content: stretch
+  -ms-flex-line-pack: stretch
+  align-content: stretch
+  -webkit-align-items: flex-start
+  -ms-flex-align: start
+  align-items: flex-start
+
+.box-header
+  height: 30px
+  -webkit-order: 0
+  -ms-flex-order: 0
+  order: 0
+  -webkit-flex: 0 1 auto
+  -ms-flex: 0 1 auto
+  flex: 0 1 auto
+  -webkit-align-self: stretch
+  -ms-flex-item-align: stretch
+  align-self: stretch
+
+.box-months
+  height: 60px
+  -webkit-order: 0
+  -ms-flex-order: 0
+  order: 0
+  -webkit-flex: 0 1 auto
+  -ms-flex: 0 1 auto
+  flex: 0 1 auto
+  -webkit-align-self: stretch
+  -ms-flex-item-align: stretch
+  align-self: stretch
+
+.box-values
+  height: calc(50% - 90px)
+  border-bottom: 1px solid rgba(black, .1)
+  padding-bottom: 1rem
+  -webkit-order: 0
+  -ms-flex-order: 0
+  order: 0
+  -webkit-flex: .25 1 auto
+  -ms-flex: .25 1 auto
+  flex: .25 1 auto
+  -webkit-align-self: stretch
+  -ms-flex-item-align: stretch
+  align-self: stretch
+
+.box-transactions
+  height: 50%
+  padding-top: 1rem
+  -webkit-order: 0
+  -ms-flex-order: 0
+  order: 0
+  -webkit-flex: 1 1 auto
+  -ms-flex: 1 1 auto
+  flex: 1 1 auto
+  -webkit-align-self: stretch
+  -ms-flex-item-align: stretch
+  align-self: stretch
+  .title-wrapper
+    height: 22px
+  .list-wrapper
+    -webkit-order: 0
+    -ms-flex-order: 0
+    order: 0
+    -webkit-flex: 1 1 auto
+    -ms-flex: 1 1 auto
+    flex: 1 1 auto
+    -webkit-align-self: stretch
+    -ms-flex-item-align: stretch
+    align-self: stretch
+
+.main-value
+  font-size: 2rem
+
+.income-result,
+.expense-result
+  padding-left: 15px
+  position: relative
+  &::before
+    content: " "
+    position: absolute
+    display: block
+    width: 8px
+    height: 8px
+    border-radius: 4px
+    left: 0
+    top: 50%
+    margin-top: -4px
+
+.income-result
+  &::before
+    background-color: #2E3C40
+
+.expense-result
+  &::before
+    background-color: #586479
+
+.bars-wrapper
+  position: relative
+  padding-bottom: 15px
+  [class*='bar-']
+    display: block
+    width: 8px
+    height: 0%
+    border-radius: 4px
+    background-color: red
+    margin-left: 10px
+    position: relative
+    transition: height .3s ease-out
+    transition-delay: .3s
+    &::before
+      content: " "
+      position: absolute
+      display: block
+      width: 8px
+      height: 8px
+      border-radius: 4px
+      bottom: -15px
+      left: 0
+    &.bar-income,
+    &.bar-income::before
+      background-color: #2E3C40
+    &.bar-expense,
+    &.bar-expense::before
+      background-color: #586479
+
+@for $i from 0 to 101
+  .bars-wrapper span[data-percent="#{$i}"]
+    height: percentage($i/100)
+
+.list-wrapper
+  padding-top: 1rem
+  overflow-y: scroll
+  ul
+    margin: 0
+    padding: 0
+    list-style: none
+
+    li
+      padding-bottom: .5rem
+
+.item-transaction
+  background-color: #FFFFFF
+  padding: .5rem
+  height: 55px
+  border-radius: 15px
+  display: -ms-flexbox
+  display: -webkit-flex
+  display: flex
+  -webkit-flex-direction: ro
+  -ms-flex-direction: ro
+  flex-direction: ro
+  -webkit-flex-wrap: nowra
+  -ms-flex-wrap: nowra
+  flex-wrap: nowra
+  -webkit-justify-content: flex-star
+  -ms-flex-pack: start
+  justify-content: flex-star
+  -webkit-align-content: stretch
+  -ms-flex-line-pack: stretc
+  align-content: stretch
+  -webkit-align-items: cente
+  -ms-flex-align: center
+  align-items: cente
+  .icon-wrapper
+    width: 41px
+    max-width: 41px
+    min-width: 41px
+    height: 100%
+    border-radius: 10px
+    -webkit-order: 0
+    -ms-flex-order: 0
+    order: 0
+    -webkit-flex: 0 1 auto
+    -ms-flex: 0 1 auto
+    flex: 0 1 auto
+    -webkit-align-self: auto
+    -ms-flex-item-align: auto
+    align-self: auto
+    i-feather
+      width: 20px
+      height: 20px
+  .description-wrapper
+    width: calc(100% - 41px - 95px)
+    max-width: calc(100% - 41px - 95px)
+    padding-left: .5rem
+    -webkit-order: 0
+    -ms-flex-order: 0
+    order: 0
+    -webkit-flex: 1 1 auto
+    -ms-flex: 1 1 auto
+    flex: 1 1 auto
+    -webkit-align-self: auto
+    -ms-flex-item-align: auto
+    align-self: auto
+    h3,
+    p
+      font-size: 14px
+      line-height: 18px
+      white-space: nowrap
+      overflow: hidden
+      text-overflow: ellipsis
+  .price-wrapper
+    width: 95px
+    max-width: 95px
+    min-width: 95px
+    padding-left: .5rem
+    -webkit-order: 0
+    -ms-flex-order: 0
+    order: 0
+    -webkit-flex: 0 1 auto
+    -ms-flex: 0 1 auto
+    flex: 0 1 auto
+    -webkit-align-self: auto
+    -ms-flex-item-align: auto
+    align-self: auto
