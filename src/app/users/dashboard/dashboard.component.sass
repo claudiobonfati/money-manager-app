@@ -32,67 +32,76 @@
   align-items: flex-start
 
 .box-header
-  height: 30px
+  flex-basis: 30px
+  flex-grow: 0
+  flex-shrink: 0
   -webkit-order: 0
   -ms-flex-order: 0
   order: 0
-  -webkit-flex: 0 1 auto
-  -ms-flex: 0 1 auto
-  flex: 0 1 auto
   -webkit-align-self: stretch
   -ms-flex-item-align: stretch
   align-self: stretch
 
 .box-months
-  height: 60px
+  flex-basis: 60px
+  flex-grow: 0
+  flex-shrink: 0
   -webkit-order: 0
   -ms-flex-order: 0
   order: 0
-  -webkit-flex: 0 1 auto
-  -ms-flex: 0 1 auto
-  flex: 0 1 auto
   -webkit-align-self: stretch
   -ms-flex-item-align: stretch
   align-self: stretch
+  button
+    background: transparent
+    border: 0
+    display: block
+    position: relative
+    width: 100%
+    transition: all .1s ease-out
+    &[disabled]
+      opacity: 0
+    small
+      position: absolute
+      width: 100%
+      left: 0
+      bottom: -5px
+      font-weight: bold
+      font-size: 8px
 
 .box-values
-  height: calc(50% - 90px)
-  border-bottom: 1px solid rgba(black, .1)
   padding-bottom: 1rem
+  flex-basis: calc(50% - 90px)
+  flex-grow: 0
+  flex-shrink: 0
+  border-bottom: 1px solid rgba(black, .1)
   -webkit-order: 0
   -ms-flex-order: 0
   order: 0
-  -webkit-flex: .25 1 auto
-  -ms-flex: .25 1 auto
-  flex: .25 1 auto
   -webkit-align-self: stretch
   -ms-flex-item-align: stretch
   align-self: stretch
 
 .box-transactions
-  height: 50%
   padding-top: 1rem
+  display: flex
+  flex-direction: column
+  flex-basis: 50%
+  flex-grow: 0
+  flex-shrink: 0
   -webkit-order: 0
   -ms-flex-order: 0
   order: 0
-  -webkit-flex: 1 1 auto
-  -ms-flex: 1 1 auto
-  flex: 1 1 auto
   -webkit-align-self: stretch
   -ms-flex-item-align: stretch
   align-self: stretch
+  overflow: hidden
   .title-wrapper
-    height: 22px
+    flex: 0 0 30px
   .list-wrapper
-    -webkit-order: 0
-    -ms-flex-order: 0
-    order: 0
-    -webkit-flex: 1 1 auto
-    -ms-flex: 1 1 auto
-    flex: 1 1 auto
-    -webkit-align-self: stretch
-    -ms-flex-item-align: stretch
-    align-self: stretch
+    padding-top: 1rem
+    flex: 0 0 calc(100% - 30px)
+    overflow: scroll
 
 .main-value
   font-size: 2rem
@@ -154,14 +163,12 @@
     height: percentage($i/100)
 
 .list-wrapper
-  padding-top: 1rem
-  overflow-y: scroll
   ul
     margin: 0
     padding: 0
     list-style: none
 
-    li
+    li:not(:last-child)
       padding-bottom: .5rem
 
 .item-transaction
