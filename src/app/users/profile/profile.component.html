@@ -7,24 +7,28 @@
             <div class="profile-pick-wrapper"
             [class.animate-shake]="nameAnimateShake">
               <div class="profile-pick">
-                <file-pond #myPond 
-                  [options]="pondOptions" 
+                <file-pond #myPond
+                  [options]="pondOptions"
                   [files]="pondFiles"
                   (onaddfile)="pondHandleAddFile($event)">
                 </file-pond>
               </div>
             </div>
-            <input class="field-inline-invisible font-weight-bold lay-color-outer-space font-lg w-100 text-center" 
+            <input class="field-inline-invisible font-weight-bold lay-color-outer-space font-lg w-100 text-center"
               formControlName="name" />
             <div class="w-100 row no-gutters d-flex align-items-center justify-content-between">
               <div class="col py-4 text-center">
-                <b class="lay-color-outer-space">255</b><br/>
+                <b class="lay-color-outer-space">
+                  255
+                </b><br/>
                 <span class="lay-color-aluminium">
                   Transactions
                 </span>
               </div>
               <div class="col py-4 text-center">
-                <b class="lay-color-outer-space">$ 2.568,000</b><br/>
+                <b class="lay-color-outer-space">
+                  $ 2.568,000
+                </b><br/>
                 <span class="lay-color-aluminium">
                   In wallet
                 </span>
@@ -33,7 +37,7 @@
           </div>
           <div class="col-12">
             <div class="field-theme-02-light mb-3" [class.filled]="profileForm.get('email').value.length">
-              <input type="email" 
+              <input type="email"
               placeholder="Email"
               formControlName="email"
               id="profile-email">
@@ -43,7 +47,7 @@
               [class.filled]="profileForm.get('birthday').value && profileForm.get('birthday').value.length"
               [class.is-invalid]="profileSent && profileForm.controls.birthday.errors"
               [class.animate-shake]="birthdayAnimateShake">
-              <input [type]="getBirthdayInputType()" 
+              <input [type]="getBirthdayInputType()"
               onfocus="(this.type='date')"
               onblur="if(!this.value)this.type='text'"
               formControlName="birthday"
@@ -55,7 +59,7 @@
             <button class="btn-border-outer-space btn-loader-effect w-100 font-weight-bold lay-bg-outer-space lay-color-athens-gray"
             [ngClass]="profileBtnStatus">
               <span class="btn-loader-text">
-                Update!
+                Update
               </span>
               <span class="btn-loader-icon-loading">
                 <i-feather name="loader"></i-feather>
