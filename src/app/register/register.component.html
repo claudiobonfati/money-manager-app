@@ -10,38 +10,38 @@
           </div>
           <div class="w-100 position-relative">
             <div class="w-100" *ngIf="currentStep === 'email'" [@panelInOut]>
-              <p class="lay-color-aluminium mb-5">Tell me who you are</p>
+              <p class="app-color-aluminium mb-5">Tell me who you are</p>
               <form [formGroup]="registerForm" (ngSubmit)="validateRegister()">
                 <div class="w-100 px-3">
                   <div class="field-theme-01-athens-gray mb-3"
                     [class.is-invalid]="registerSent && registerForm.controls.name.errors">
                     <span class="icomoon-person icon-left"></span>
-                    <input type="text" 
-                    placeholder="Name" 
+                    <input type="text"
+                    placeholder="Name"
                     #inputName
                     formControlName="name" >
                     <span class="icomoon-warning icon-right"></span>
                   </div>
-                  <div class="field-theme-01-athens-gray mb-5" 
+                  <div class="field-theme-01-athens-gray mb-5"
                     [class.is-invalid]="registerSent && registerForm.controls.email.errors"
                     [class.animate-shake]="emailAnimateShake">
                     <span class="icomoon-mail icon-left"></span>
-                    <input type="text" 
-                    placeholder="Email" 
+                    <input type="text"
+                    placeholder="Email"
                     formControlName="email" >
                     <span class="icomoon-warning icon-right"></span>
                     <span class="error-msg" [class.show]="registerSent && emailErrorMsg">{{ emailErrorMsg }}</span>
                   </div>
                 </div>
                 <div class="w-100">
-                  <button class="btn-border-athens-gray w-100 font-weight-bold lay-color-athens-gray">
+                  <button class="btn-border-athens-gray w-100 font-weight-bold app-color-athens-gray">
                     Next
                   </button>
                 </div>
               </form>
             </div>
             <div class="w-100" *ngIf="currentStep === 'password'" [@panelInOut]>
-              <p class="lay-color-aluminium mb-5">Type your new password <br />
+              <p class="app-color-aluminium mb-5">Type your new password <br />
               <small>(6 digits, only numbers)</small></p>
               <form [formGroup]="passwordForm" (ngSubmit)="register()">
                 <div class="w-100 px-3">
@@ -49,30 +49,30 @@
                     [class.is-invalid]="passwordSent && passwordForm.controls.password.errors"
                     [class.animate-shake]="passwordAnimateShake">
                     <span class="icomoon-lock-closed icon-left"></span>
-                    <input type="password" 
+                    <input type="password"
                       placeholder="Password"
-                      pattern="[0-9]*" 
-                      inputmode="numeric" 
-                      formControlName="password" 
+                      pattern="[0-9]*"
+                      inputmode="numeric"
+                      formControlName="password"
                       (keyup)="onPasswordChange('password', $event.target.value)">
                     <span class="icomoon-warning icon-right"></span>
                   </div>
-                  <div class="field-theme-01-athens-gray mb-5" 
+                  <div class="field-theme-01-athens-gray mb-5"
                     [class.is-invalid]="passwordSent && passwordForm.controls.confirm.errors"
                     [class.animate-shake]="confirmAnimateShake">
                     <span class="icomoon-lock-closed icon-left"></span>
-                    <input type="password" 
+                    <input type="password"
                       placeholder="Confirm password"
                       pattern="[0-9]*"
-                      inputmode="numeric" 
-                      formControlName="confirm" 
+                      inputmode="numeric"
+                      formControlName="confirm"
                       (keyup)="onPasswordChange('confirm', $event.target.value)" >
                     <span class="icomoon-warning icon-right"></span>
                     <span class="error-msg" [class.show]="passwordSent && confirmErrorMsg">{{ confirmErrorMsg }}</span>
                   </div>
                 </div>
                 <div class="w-100">
-                  <button class="btn-border-athens-gray w-100 font-weight-bold lay-color-outer-space lay-bg-athens-gray">
+                  <button class="btn-border-athens-gray w-100 font-weight-bold app-color-outer-space app-bg-athens-gray">
                     Done!
                   </button>
                 </div>
@@ -81,7 +81,7 @@
           </div>
         </div>
         <div class="col-12 text-center align-self-end py-3">
-          <a href="javascript:void(0);" title="Sign in" routerLink="/login" class="font-weight-bold lay-color-athens-gray text-decoration-none p-2">
+          <a href="javascript:void(0);" title="Sign in" routerLink="/login" class="font-weight-bold app-color-athens-gray text-decoration-none p-2">
             Already registered? Sign in!
           </a>
         </div>

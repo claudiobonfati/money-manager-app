@@ -25,16 +25,16 @@ hr
   text-decoration: underline
 
 @each $color in $color-config
-  .lay-color-#{nth($color, 1)},
-  .lay-color-#{nth($color, 1)}:hover,
-  .lay-color-#{nth($color, 1)}:active ,
-  .lay-color-#{nth($color, 1)}:focus ,
-  .lay-color-#{nth($color, 1)}:visited,
-  .lay-color-#{nth($color, 1)} *,
-  .lay-color-#{nth($color, 1)} *:hover,
-  .lay-color-#{nth($color, 1)} *:active ,
-  .lay-color-#{nth($color, 1)} *:focus ,
-  .lay-color-#{nth($color, 1)} *:visited
+  .app-color-#{nth($color, 1)},
+  .app-color-#{nth($color, 1)}:hover,
+  .app-color-#{nth($color, 1)}:active ,
+  .app-color-#{nth($color, 1)}:focus ,
+  .app-color-#{nth($color, 1)}:visited,
+  .app-color-#{nth($color, 1)} *,
+  .app-color-#{nth($color, 1)} *:hover,
+  .app-color-#{nth($color, 1)} *:active ,
+  .app-color-#{nth($color, 1)} *:focus ,
+  .app-color-#{nth($color, 1)} *:visited
     color: nth($color, 2)
 
 @each $value in $fontsize-config

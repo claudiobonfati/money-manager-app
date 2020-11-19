@@ -5,7 +5,7 @@ import { environment } from '../../../environments/environment';
 import { UserModel } from './../models/user.model';
 import { ProfileModel } from './../models/profile.model';
 import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators'; 
+import { catchError, retry } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 
 
@@ -59,7 +59,7 @@ export class HttpService {
 
   private clearLocalUserData(): void {
     localStorage.removeItem('token');
-    localStorage.removeItem('currentUser');  
+    localStorage.removeItem('currentUser');
   }
 
   public logout(): any {
@@ -83,7 +83,7 @@ export class HttpService {
     return this.http.get(this.url);
   }
 
-  public post(body: object): Observable<any> {
+  public post(body: object = {}): Observable<any> {
     return this.http.post<object>(this.url, body);
   }
 
