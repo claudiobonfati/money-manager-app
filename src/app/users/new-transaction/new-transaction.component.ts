@@ -159,7 +159,7 @@ export class NewTransactionComponent implements OnInit {
     const tgt = target + 'AnimateShake';
 
     if (this[tgt] === undefined)
-      return
+      return;
 
     this[tgt] = true;
 
@@ -175,24 +175,21 @@ export class NewTransactionComponent implements OnInit {
     this.transactionSent = true;
 
     if (this.transactionForm.invalid) {
-      if (this.transactionForm.get('title').status === "INVALID") {
+      if (this.transactionForm.get('title').status === "INVALID")
         this.applyShakeAnimation('title');
-      }
-      if (this.transactionForm.get('recurrence').status === "INVALID") {
+      if (this.transactionForm.get('recurrence').status === "INVALID")
         this.applyShakeAnimation('recurrence');
-      }
-      if (this.transactionForm.get('dayDue').status === "INVALID") {
+      if (this.transactionForm.get('dayDue').status === "INVALID")
         this.applyShakeAnimation('dayDue');
-      }
-      if (this.transactionForm.get('price').status === "INVALID") {
+      if (this.transactionForm.get('price').status === "INVALID")
         this.applyShakeAnimation('price');
-      }
 
       this.setBtn('error');
       return;
     }
 
-    if (this.transactionForm.get('recurrence').value === 'weekly' || this.transactionForm.get('recurrence').value === 'every_two_weeks') {
+    if (this.transactionForm.get('recurrence').value === 'weekly' ||
+        this.transactionForm.get('recurrence').value === 'every_two_weeks') {
       if (!this.transactionForm.get('instalments').value ||
           this.transactionForm.get('instalments').value < 2) {
         this.applyShakeAnimation('instalments');
@@ -225,6 +222,11 @@ export class NewTransactionComponent implements OnInit {
         setTimeout(() => {
           this.setBtn('ok');
           this.transactionForm.reset();
+          this.transactionForm.patchValue({
+            recurrence: 'once',
+            price: '',
+            dayDue: this.todayDate
+          });
         }, 1000)
       }, (error: HttpErrorResponse) => {
         console.log(error);
