@@ -62,7 +62,7 @@
                       <input type="date"
                       *ngIf="transactionForm.get('recurrence').value !== 'weekly' &&
                              transactionForm.get('recurrence').value !== 'every_two_weeks'"
-                      formControlName="dayDue"
+                      formControlName="dayDueMonth"
                       id="transaction-dayDue">
                       <select
                       *ngIf="transactionForm.get('recurrence').value === 'weekly' ||

@@ -58,11 +58,14 @@ export class NewTransactionComponent implements OnInit {
           Validators.maxLength(2)
         ]
       ],
-      dayDue: [
+      dayDueMonth: [
         this.todayDate,
         [
           Validators.required
         ]
+      ],
+      dayDue: [
+        '1',
       ],
       price: [
         '',
@@ -96,18 +99,19 @@ export class NewTransactionComponent implements OnInit {
     let recurrence = this.transactionForm.get('recurrence').value;
 
     if (recurrence === 'weekly' || recurrence === 'every_two_weeks') {
-      this.transactionForm.get('dayDue').setValue('2');
+      this.transactionForm.get('dayDue').setValue('1');
     } else {
       this.transactionForm.get('dayDue').setValue(this.todayDate);
     }
   }
 
   onInstalmentsChange(): void {
+    let limit = 24;
     let instalments = this.transactionForm.get('instalments').value;
 
-    if (instalments > 99) {
+    if (instalments > limit) {
       this.applyShakeAnimation(instalments);
-      this.transactionForm.get('instalments').setValue(99);
+      this.transactionForm.get('instalments').setValue(limit);
     } else if (instalments < 1) {
       this.applyShakeAnimation(instalments);
       this.transactionForm.get('instalments').setValue(1);
@@ -179,8 +183,6 @@ export class NewTransactionComponent implements OnInit {
         this.applyShakeAnimation('title');
       if (this.transactionForm.get('recurrence').status === "INVALID")
         this.applyShakeAnimation('recurrence');
-      if (this.transactionForm.get('dayDue').status === "INVALID")
-        this.applyShakeAnimation('dayDue');
       if (this.transactionForm.get('price').status === "INVALID")
         this.applyShakeAnimation('price');
 
@@ -213,6 +215,16 @@ export class NewTransactionComponent implements OnInit {
       instalments: (this.transactionForm.get('recurrence').value === 'once' ? 1 : this.transactionForm.get('instalments').value),
       dayDue: 0,
       price: this.transactionForm.get('price').value
+    }
+
+    if (this.transactionForm.get('recurrence').value === 'weekly' ||
+        this.transactionForm.get('recurrence').value === 'every_two_weeks') {
+      body.dayDue = this.transactionForm.get('dayDue').value;
+    } else if (this.transactionForm.get('recurrence').value === 'once' ||
+        this.transactionForm.get('recurrence').value === 'monthly') {
+      let dayDueInput = new Date(this.transactionForm.get('dayDueMonth').value);
+      let day = dayDueInput.getDate();
+      body.dayDue = day + 1;
     }
 
     this.httpService.buildUrl('contracts')
