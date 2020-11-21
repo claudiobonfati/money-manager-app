@@ -13,7 +13,7 @@ import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orien
 import FilePondPluginImageCrop from 'filepond-plugin-image-crop';
 import FilePondPluginImageResize from 'filepond-plugin-image-resize';
 import { FeatherModule } from 'angular-feather';
-import { Edit2, Plus, Loader, Check, AlertTriangle } from 'angular-feather/icons';
+import { Edit2, Plus, Loader, Check, AlertTriangle, Activity, Anchor, Coffee, CreditCard, DollarSign, Headphones, Map, Monitor, ShoppingCart, Smartphone, Tool, Bookmark, Star } from 'angular-feather/icons';
 import { CurrencyMaskModule } from "ng2-currency-mask";
 
 registerPlugin(
@@ -29,26 +29,39 @@ const icons = {
   Plus,
   Loader,
   Check,
-  AlertTriangle
+  AlertTriangle,
+  Activity,
+  Anchor,
+  Coffee,
+  CreditCard,
+  DollarSign,
+  Headphones,
+  Map,
+  Monitor,
+  ShoppingCart,
+  Smartphone,
+  Tool,
+  Bookmark,
+  Star
 };
 
 const routes: Routes = [
-  { 
-    path: 'dashboard', 
+  {
+    path: 'dashboard',
     component: DashboardComponent,
     canActivate: [AuthGuard],
     data: {
       class: "page-dashboard"
     }
-  }, { 
-    path: 'profile', 
+  }, {
+    path: 'profile',
     component: ProfileComponent,
     canActivate: [AuthGuard],
     data: {
       class: "page-profile"
     }
-  }, { 
-    path: 'new-transaction', 
+  }, {
+    path: 'new-transaction',
     component: NewTransactionComponent,
     canActivate: [AuthGuard],
     data: {
