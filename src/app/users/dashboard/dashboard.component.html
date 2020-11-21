@@ -75,7 +75,7 @@
                 </div>
               </div>
             </div>
-            <div class="box-transactions"> <!-- d-flex flex-column -->
+            <div class="box-transactions">
               <div class="title-wrapper w-100 d-flex align-items-center justify-content-between">
                 <h4 class="app-color-outer-space m-0">
                   All Transactions
@@ -90,8 +90,8 @@
                 <ul>
                   <li *ngFor="let item of data.transactions; index as i;">
                     <div class="item-transaction d-flex">
-                      <div class="icon-wrapper d-flex align-items-center justify-content-center app-bg-athens-gray app-color-outer-space">
-                        <i-feather name="user"></i-feather>
+                      <div class="icon-wrapper d-flex align-items-center justify-content-center app-bg-athens-gray app-color-outer-space" [attr.title]="item.category ? item.category.name : 'Transaction'">
+                        <i-feather name="{{ item.type === 'income' || !item.category ? 'dollar-sign' : item.category.icon }}"></i-feather>
                       </div>
                       <div class="description-wrapper d-flex flex-column justify-content-center">
                         <h3 class="m-0 app-color-outer-space">
@@ -103,7 +103,7 @@
                       </div>
                       <div class="price-wrapper align-items-end d-flex align-items-center">
                         <b class="m-0 app-color-outer-space d-block w-100 text-right">
-                          {{ (item.type === 'expense'? '- ' : '') + getOutputMoney(item.price) }}
+                          {{ (item.type === 'expense' ? '- ' : '') + getOutputMoney(item.price) }}
                         </b>
                       </div>
                     </div>

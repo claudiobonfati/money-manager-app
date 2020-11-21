@@ -79,8 +79,9 @@ export class DashboardComponent implements OnInit {
     .subscribe({
       next: data => {
         this.data = data;
-
         this.calcPercentages(data);
+
+        console.log(data);
       },
       error: error => {
         this.data = null;
