@@ -22,6 +22,7 @@ export class ProfileComponent implements OnInit {
   public profileAvatarModified: boolean = false;
   public profileAvatarEvent: any;
   public pondFiles: any = ['assets/images/mascot.svg'];
+  public wallet: any = null;
 
   @ViewChild('myPond') myPond: any;
 
@@ -74,17 +75,39 @@ export class ProfileComponent implements OnInit {
           disabled: true
         },
         [
-          Validators.required, 
+          Validators.required,
           Validators.email
         ]
       ],
       birthday: [
-        birthday, 
+        birthday,
         [
           Validators.required
         ]
       ]
     });
+
+    this.getWallet();
+  }
+
+  getWallet(): void {
+    this.httpService.buildUrl('users/me/wallet')
+    .get()
+    .subscribe({
+      next: data => {
+        this.wallet = data;
+      },
+      error: error => {
+        this.wallet = null;
+      }
+    })
+  }
+
+  getOutputMoney(value = 0): String {
+    return (value).toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    })
   }
 
   getBirthdayInputType(): string {

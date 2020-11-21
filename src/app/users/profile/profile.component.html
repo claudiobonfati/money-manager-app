@@ -19,7 +19,14 @@
             <div class="w-100 row no-gutters d-flex align-items-center justify-content-between">
               <div class="col py-4 text-center">
                 <b class="app-color-outer-space">
-                  255
+                  <span class="delayed-content" [class.loading]="!wallet">
+                    <span class="content">
+                      {{ wallet ? wallet.transactions : ' ' }}
+                    </span>
+                    <span class="icon-loader">
+                      <i-feather name="loader"></i-feather>
+                    </span>
+                  </span>
                 </b><br/>
                 <span class="app-color-aluminium">
                   Transactions
@@ -27,7 +34,14 @@
               </div>
               <div class="col py-4 text-center">
                 <b class="app-color-outer-space">
-                  $ 2.568,000
+                  <span class="delayed-content" [class.loading]="!wallet">
+                    <span class="content">
+                      {{ wallet ? getOutputMoney(wallet.inWallet) : ' ' }}
+                    </span>
+                    <span class="icon-loader">
+                      <i-feather name="loader"></i-feather>
+                    </span>
+                  </span>
                 </b><br/>
                 <span class="app-color-aluminium">
                   In wallet
