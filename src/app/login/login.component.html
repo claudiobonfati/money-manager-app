@@ -8,7 +8,10 @@
               <img src="assets/images/logo-money-manager.svg" alt="{{ env.name }}" id="logo-mm" class="mb-2">
             </a>
             <div class="w-100" [@panelInOut]>
-              <p class="app-color-aluminium mb-5">Tell me your email</p>
+              <p class="app-color-aluminium mb-5">
+                Welcome back.<br>
+                You've been missed!
+              </p>
               <form [formGroup]="emailForm" (ngSubmit)="getPresentation()">
                 <div class="w-100 px-3 mb-5">
                   <div class="field-theme-01-athens-gray"
