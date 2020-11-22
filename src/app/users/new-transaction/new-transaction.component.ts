@@ -106,7 +106,7 @@ export class NewTransactionComponent implements OnInit {
   }
 
   onInstalmentsChange(): void {
-    let limit = 24;
+    let limit = 999;
     let instalments = this.transactionForm.get('instalments').value;
 
     if (instalments > limit) {
