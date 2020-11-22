@@ -13,13 +13,13 @@ export class NewTransactionComponent implements OnInit {
   public transactionForm: FormGroup;
   public transactionSent: boolean = false;
   public transactionBtnStatus: string = '';
-  public transactionType: string = 'expense';
+  private transactionType: string = 'expense';
   public titleAnimateShake: boolean = false;
   public recurrenceAnimateShake: boolean = false;
   public instalmentsAnimateShake: boolean = false;
   public dayDueAnimateShake: boolean = false;
   public priceAnimateShake: boolean = false;
-  public todayDate: string;
+  private todayDate: string;
 
   constructor(
     public formBuilder: FormBuilder,

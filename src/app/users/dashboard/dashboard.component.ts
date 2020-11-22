@@ -8,13 +8,13 @@ import { HttpService } from 'src/app/core/services/http.service';
   styleUrls: ['./dashboard.component.sass']
 })
 export class DashboardComponent implements OnInit {
-  public today: Date;
+  private today: Date;
   public active_month: number;
   public current_month: number;
   public active_year: number;
   public current_year: number;
-  public active_day: number;
-  public current_day: number;
+  private active_day: number;
+  private current_day: number;
   public month_names: Array<String> = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   public data: any;
   public newUser: boolean = false;

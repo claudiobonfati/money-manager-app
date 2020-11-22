@@ -28,17 +28,17 @@ export class RegisterComponent implements OnInit {
   public env = environment;
   public currentStep: string = 'email';
 
-  public registerForm: FormGroup;
-  public registerSent: boolean = false;
-  public emailErrorMsg: string;
-  public nameAnimateShake: boolean = false;
-  public emailAnimateShake: boolean = false;
+  private registerForm: FormGroup;
+  private registerSent: boolean = false;
+  private emailErrorMsg: string;
+  private nameAnimateShake: boolean = false;
+  private emailAnimateShake: boolean = false;
 
-  public passwordForm: FormGroup;
-  public passwordSent: boolean = false;
-  public confirmErrorMsg: string;
-  public passwordAnimateShake: boolean = false;
-  public confirmAnimateShake: boolean = false;
+  private passwordForm: FormGroup;
+  private passwordSent: boolean = false;
+  private confirmErrorMsg: string;
+  private passwordAnimateShake: boolean = false;
+  private confirmAnimateShake: boolean = false;
 
   @ViewChild('inputName') inputName:ElementRef;
 
@@ -51,7 +51,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
       name: [
-        "", 
+        "",
         [
           Validators.required,
           Validators.minLength(3),
@@ -59,16 +59,16 @@ export class RegisterComponent implements OnInit {
         ]
       ],
       email: [
-        "", 
+        "",
         [
-          Validators.required, 
+          Validators.required,
           Validators.email
         ]
       ]
     });
     this.passwordForm = this.formBuilder.group({
       password: [
-        "", 
+        "",
         [
           Validators.required,
           Validators.minLength(6),
@@ -77,7 +77,7 @@ export class RegisterComponent implements OnInit {
         ]
       ],
       confirm: [
-        "", 
+        "",
         [
           Validators.required,
           Validators.minLength(6),
@@ -117,7 +117,7 @@ export class RegisterComponent implements OnInit {
 
     if (this.passwordForm.invalid)
       return
-    
+
     if (this.passwordForm.get('password').value !== this.passwordForm.get('confirm').value) {
       this.applyShakeAnimation('confirm');
       this.confirmErrorMsg = 'Passwords don\'t macth!';
@@ -140,7 +140,7 @@ export class RegisterComponent implements OnInit {
         this.passwordForm.get('password').setValue('');
         this.passwordForm.get('confirm').setValue('');
       }
-    )   
+    )
   }
 
   applyShakeAnimation(target: string): void {

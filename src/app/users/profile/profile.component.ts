@@ -13,14 +13,14 @@ import { HelperService } from 'src/app/core/services/helper.service';
 })
 export class ProfileComponent implements OnInit {
   public env = environment;
-  public currentUser: ProfileModel;
+  private currentUser: ProfileModel;
   public profileForm: FormGroup;
   public profileSent: boolean = false;
   public profileBtnStatus: string = '';
   public nameAnimateShake: boolean = false;
   public birthdayAnimateShake: boolean = false;
-  public profileAvatarModified: boolean = false;
-  public profileAvatarEvent: any;
+  private profileAvatarModified: boolean = false;
+  private profileAvatarEvent: any;
   public pondFiles: any = ['assets/images/mascot.svg'];
   public wallet: any = null;
 

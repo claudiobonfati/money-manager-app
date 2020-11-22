@@ -27,20 +27,20 @@ import { UserModel } from 'src/app/core/models/user.model'
 })
 export class LoginComponent implements OnInit {
   public env = environment;
-  public currentUser: any;
+  private currentUser: any;
   public currentStep: string = '';
-  public loginMode: string = '';
-  public loginBtnStatus: string = '';
+  private loginMode: string = '';
+  private loginBtnStatus: string = '';
 
-  public emailForm: FormGroup;
-  public emailSent: boolean = false;
-  public emailErrorMsg: string;
-  public emailAnimateShake: boolean = false;
+  private emailForm: FormGroup;
+  private emailSent: boolean = false;
+  private emailErrorMsg: string;
+  private emailAnimateShake: boolean = false;
 
-  public passwordForm: FormGroup;
-  public passwordSent: boolean = false;
-  public passwordAnimateShake: boolean = false;
-  public passButtons: Array<any> = [];
+  private passwordForm: FormGroup;
+  private passwordSent: boolean = false;
+  private passwordAnimateShake: boolean = false;
+  private passButtons: Array<any> = [];
   private password: Array<any> = [];
 
   constructor(
@@ -54,16 +54,16 @@ export class LoginComponent implements OnInit {
     // Initiate forms
     this.emailForm = this.formBuilder.group({
       email: [
-        "", 
+        "",
         [
-          Validators.required, 
+          Validators.required,
           Validators.email
         ]
       ]
     });
     this.passwordForm = this.formBuilder.group({
       password: [
-        "", 
+        "",
         [
           Validators.required,
           Validators.minLength(6),
@@ -97,7 +97,7 @@ export class LoginComponent implements OnInit {
     // Set login type
     let _id = localStorage.getItem('loginEasyId');
     let name = localStorage.getItem('loginEasyName');
-    
+
     if (_id && name) {
       _id = atob(_id);
       name = atob(name);
@@ -211,7 +211,7 @@ export class LoginComponent implements OnInit {
       this.setBtn('error');
       return;
     }
-    
+
     this.setBtn('loading');
 
     if (this.loginMode === 'normal'){
@@ -231,7 +231,7 @@ export class LoginComponent implements OnInit {
         }, (error: HttpErrorResponse) => {
           this.setBtn('error');
           this.applyShakeAnimation('password');
-        }  
+        }
       )
     } else {
       const id = atob(localStorage.getItem('loginEasyId'));
