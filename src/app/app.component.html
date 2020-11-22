@@ -1,6 +1,19 @@
 <div class="mm-main-wrapper"
 [ngClass]="{ 'is-mobile': helperService.isMobile() }"
 ontouchstart="" >
+  <div class="disclaimer" [class.active]="disclaimer">
+    <button (click)="callDisclaimer()">
+      <i-feather name="help-circle"></i-feather>
+    </button>
+    <div class="alert">
+      <p class="app-color-outer-space mb-2">
+        <b>This is a demo application</b>.
+      </p>
+      <p class="app-color-outer-space mb-0">
+        All the data stored here is <b>automatically deleted</b> every two months.
+      </p>
+    </div>
+  </div>
 	<div id="mm-wrapper-router"
   [attr.data-width]="dimension.x"
   [attr.data-height]="dimension.y"

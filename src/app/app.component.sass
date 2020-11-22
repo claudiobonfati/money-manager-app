@@ -24,6 +24,42 @@
   -ms-flex-align: center
   align-items: center
 
+  .disclaimer
+    button
+      position: absolute
+      border: 0
+      background-color: transparent
+      width: 40px
+      height: 40px
+      border-radius: 50%
+      color: rgba(#FFF, .3)
+      line-height: 55px
+      text-align: center
+      padding: 0
+      top: 10px
+      left: 10px
+      transition: .2s all ease-out
+      &:hover
+        background-color: rgba(#FFF, .1)
+
+    .alert
+      position: absolute
+      width: 200px
+      padding: 20px
+      border-radius: 20px
+      background-color: #f8f8f9
+      text-align: center
+      top: 60px
+      left: 20px
+      z-index: 20
+      box-shadow: 20px 20px 20px -2px rgba(0, 0, 0, 0.2)
+      transition: .3s all ease-out
+      transform: translateX(-400px)
+    &.active
+      .alert
+        transform: translateX(0)
+
+
 #mm-wrapper-router
   width: 100%
   height: 100%

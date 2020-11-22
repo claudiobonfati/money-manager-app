@@ -21,7 +21,7 @@ import { MenuComponent } from './core/components/menu/menu.component';
 import { environment } from '../environments/environment';
 
 import { FeatherModule } from 'angular-feather';
-import { Home, Plus, User, Mail, Key, Delete, Loader, Check, AlertTriangle } from 'angular-feather/icons';
+import { Home, Plus, User, Mail, Key, Delete, Loader, Check, AlertTriangle, HelpCircle } from 'angular-feather/icons';
 
 const icons = {
   Home,
@@ -32,26 +32,27 @@ const icons = {
   Delete,
   Loader,
   Check,
-  AlertTriangle
+  AlertTriangle,
+  HelpCircle
 };
 
 const appRoutes: Routes = [
-  { 
-    path: '', 
+  {
+    path: '',
     component: WelcomeComponent,
     canActivate: [UnauthGuard],
     data: {
       class: "page-welcome"
     }
-  }, { 
-    path: 'login', 
+  }, {
+    path: 'login',
     component: LoginComponent,
     canActivate: [UnauthGuard],
     data: {
       class: "page-login"
     }
-  }, { 
-    path: 'register', 
+  }, {
+    path: 'register',
     component: RegisterComponent,
     canActivate: [UnauthGuard],
     data: {

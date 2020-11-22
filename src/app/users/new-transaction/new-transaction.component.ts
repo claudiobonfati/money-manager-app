@@ -241,7 +241,7 @@ export class NewTransactionComponent implements OnInit {
           });
         }, 1000)
       }, (error: HttpErrorResponse) => {
-        console.log(error);
+        // console.log(error);
         setTimeout(() => {
           this.setBtn('error');
         }, 1000)

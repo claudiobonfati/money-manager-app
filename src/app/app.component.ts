@@ -75,6 +75,7 @@ export class AppComponent {
   public centralized: boolean = true;
   public env = environment;
   public show_content: boolean = false;
+  public disclaimer: boolean = false;
   public dimension: any = {
     x: 300,
     y: 600,
@@ -115,5 +116,14 @@ export class AppComponent {
 
   setDimension(axis: any, value: any): void {
     this.dimension[axis] = value;
+  }
+
+  callDisclaimer():void {
+    this.disclaimer = true;
+
+    setTimeout(() => {
+      if(this.disclaimer)
+        this.disclaimer = false;
+    }, 7000)
   }
 }

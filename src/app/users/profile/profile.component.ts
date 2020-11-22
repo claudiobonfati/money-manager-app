@@ -196,7 +196,7 @@ export class ProfileComponent implements OnInit {
         this.httpService.saveLocalUser(user);
       }, (error: HttpErrorResponse) => {
         this.setBtn('error');
-        console.log(error);
+        // console.log(error);
       }
     )
   }
@@ -221,7 +221,7 @@ export class ProfileComponent implements OnInit {
         this.profileAvatarModified = false;
       }, (error: HttpErrorResponse) => {
         this.setBtn('error');
-        console.log(error);
+        // console.log(error);
       }
     )
   }

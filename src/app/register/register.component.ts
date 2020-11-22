@@ -136,7 +136,7 @@ export class RegisterComponent implements OnInit {
         this.httpService.createLocalUser(data);
         this.router.navigate(['dashboard']);
       }, (error: HttpErrorResponse) => {
-        console.log(error)
+        // console.log(error)
         this.passwordForm.get('password').setValue('');
         this.passwordForm.get('confirm').setValue('');
       }
