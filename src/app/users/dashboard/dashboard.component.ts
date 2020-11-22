@@ -17,6 +17,9 @@ export class DashboardComponent implements OnInit {
   public current_day: number;
   public month_names: Array<String> = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   public data: any;
+  public newUser: boolean = false;
+  public loadingData: boolean = true;
+  public serverError: boolean = false;
 
   constructor(
     private httpService: HttpService
@@ -78,12 +81,19 @@ export class DashboardComponent implements OnInit {
     .post(body)
     .subscribe({
       next: data => {
-        this.data = data;
-        this.calcPercentages(data);
-
-        console.log(data);
+        if (data.newUser){
+          this.newUser = true;
+          this.loadingData = false;
+        } else {
+          this.loadingData = false;
+          this.serverError = false;
+          this.data = data;
+          this.calcPercentages(data);
+        }
       },
       error: error => {
+        this.loadingData = false;
+        this.serverError = true;
         this.data = null;
       }
     })

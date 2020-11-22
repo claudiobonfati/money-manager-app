@@ -11,6 +11,7 @@
     // outline: 1px solid red
 
 .dashboard-wrapper
+  position: relative
   height: 100%
   display: -ms-flexbox
   display: -webkit-flex
@@ -30,6 +31,85 @@
   -webkit-align-items: flex-start
   -ms-flex-align: start
   align-items: flex-start
+  .feedback-new-user
+    width: calc(100% + 40px)
+    height: calc(100% + 40px)
+    position: absolute
+    left: -20px
+    top: -20px
+    text-align: center
+    pointer-events: none
+    opacity: 0
+    background-image: url('/assets/images/desert.svg')
+    background-repeat: no-repeat
+    background-position: center bottom
+    background-size: cover
+    border-radius: 0 0 15px 15px
+    p
+      width: 140px
+      height: 150px
+      position: absolute
+      top: 25%
+      left: 50%
+      text-align: center
+      margin-left: -70px
+      transform: scale(.8)
+      pointer-events: none
+      opacity: 1 !important
+  .feedback-loading
+    width: 150px
+    height: 150px
+    position: absolute
+    top: 50%
+    left: 50%
+    text-align: center
+    margin-top: -75px
+    margin-left: -75px
+    transform: scale(.8)
+    pointer-events: none
+    opacity: 0
+    *
+      opacity: 1 !important
+    .icon-loader
+      position: absolute
+      width: 24px
+      height: 24px
+      left: 50%
+      top: 50%
+      margin-left: -12px
+      margin-top: -12px
+      opacity: 0
+      transition: all 0.2s ease-out
+      animation: rotating 2s linear infinite
+    p
+      margin-top: 100px
+  *
+    transition: .2s all ease-out
+  &.loading
+    *
+      opacity: 0
+      pointer-events: none
+    .feedback-loading
+      opacity: 1
+      transform: scale(1)
+  &.new-user
+    *
+      opacity: 0
+      pointer-events: none
+    .feedback-new-user
+      opacity: 1
+      transform: scale(1)
+      p
+        transform: scale(1)
+        pointer-events: none
+        opacity: 1 !important
+    .box-header,
+    .box-header h1
+      opacity: 1
+      z-index: 5
+    .box-header
+      justify-content: center
+
 
 .box-header
   flex-basis: 30px

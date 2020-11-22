@@ -3,7 +3,21 @@
     <div class="container h-100">
       <div class="row h-100 justify-content-center align-items-center">
         <div class="col-12 h-100">
-          <div class="dashboard-wrapper">
+          <div class="dashboard-wrapper" [class.loading]="loadingData" [class.new-user]="newUser">
+            <div class="feedback-new-user">
+              <p class="app-color-aluminium">
+                Your dashboard will be right here! <br>
+                Try clicking on the + icon below.
+              </p>
+            </div>
+            <div class="feedback-loading">
+              <span class="icon-loader app-color-aluminium">
+                <i-feather name="loader"></i-feather>
+              </span>
+              <p class="app-color-aluminium">
+                We are preparing everything for you...
+              </p>
+            </div>
             <div class="box-header d-flex align-items-center">
               <h1 class="header-title app-color-outer-space m-0">
                 MoneyManager
