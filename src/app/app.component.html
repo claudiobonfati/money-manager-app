@@ -18,7 +18,7 @@ ontouchstart="" >
   [attr.data-width]="dimension.x"
   [attr.data-height]="dimension.y"
 	[ngClass]="centralized ? 'centralized' : ''">
-    <span class="rule-x">
+    <span class="rule-x" style="background-image: url('./assets/images/rule-x.svg');">
       <span class="number noselect"><span>100</span></span>
       <span class="number noselect"><span>200</span></span>
       <span class="number noselect c-pointer" (click)="setDimension('x', 300)"><span>300</span></span>
@@ -30,7 +30,7 @@ ontouchstart="" >
       <span class="number noselect"><span>900</span></span>
       <span class="number noselect"><span>1000</span></span>
     </span>
-    <span class="rule-y">
+    <span class="rule-y" style="background-image: url('./assets/images/rule-y.svg');">
       <span class="number noselect"><span>100</span></span>
       <span class="number noselect"><span>200</span></span>
       <span class="number noselect"><span>300</span></span>
