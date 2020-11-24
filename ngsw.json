@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1606178574154,
+  "timestamp": 1606179332877,
   "index": "https://claudiobonfati.github.io/money-manager-app/index.html",
   "assetGroups": [
     {
@@ -13,7 +13,7 @@
       "urls": [
         "https://claudiobonfati.github.io/money-manager-app/favicon.ico",
         "https://claudiobonfati.github.io/money-manager-app/index.html",
-        "https://claudiobonfati.github.io/money-manager-app/main.7f6389d9b3bd2c2cedbd.js",
+        "https://claudiobonfati.github.io/money-manager-app/main.3bc153d970c5edae4358.js",
         "https://claudiobonfati.github.io/money-manager-app/polyfills.a4021de53358bb0fec14.js",
         "https://claudiobonfati.github.io/money-manager-app/runtime.e227d1a0e31cbccbf8ec.js",
         "https://claudiobonfati.github.io/money-manager-app/styles.83ab03f894dbe8e704fd.css"
@@ -141,8 +141,8 @@
     "https://claudiobonfati.github.io/money-manager-app/icomoon.7c99e9c43e3a5d60254b.svg": "d75576785462751a2c6335b2f9ee89d61058b656",
     "https://claudiobonfati.github.io/money-manager-app/icomoon.9d3e11aa46e48339d8cd.eot": "76eb20cd72b0e3196d26c4257e92f357052ef81a",
     "https://claudiobonfati.github.io/money-manager-app/icomoon.e861fb2241a3bd606961.woff": "60bce3290307c00f49b63da9b5651e9c372e2c66",
-    "https://claudiobonfati.github.io/money-manager-app/index.html": "beb7d4c31335d474d0ee5624bbe11a4386aaff1a",
-    "https://claudiobonfati.github.io/money-manager-app/main.7f6389d9b3bd2c2cedbd.js": "3b5c7499b32b53b1c2041d5b188ce469e9321795",
+    "https://claudiobonfati.github.io/money-manager-app/index.html": "91e4fd47607fa9f63c2c6b2f9e98298366e5c7b7",
+    "https://claudiobonfati.github.io/money-manager-app/main.3bc153d970c5edae4358.js": "0dfc7d022e5e3bac1aef54c02a1dffca04a7d291",
     "https://claudiobonfati.github.io/money-manager-app/polyfills.a4021de53358bb0fec14.js": "b47435a9ef2a4829f2f9dfd35599bde3614981b1",
     "https://claudiobonfati.github.io/money-manager-app/runtime.e227d1a0e31cbccbf8ec.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
     "https://claudiobonfati.github.io/money-manager-app/styles.83ab03f894dbe8e704fd.css": "0f7cbe3ae07f03d6e8028a6f18a49922ef730502"
