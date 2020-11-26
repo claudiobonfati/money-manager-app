@@ -1,6 +1,6 @@
 {
-  "name": "money-manager",
-  "short_name": "money-manager",
+  "name": "MoneyManager",
+  "short_name": "MoneyManager",
   "theme_color": "#141a1b",
   "background_color": "#141a1b",
   "display": "standalone",
