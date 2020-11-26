@@ -4,7 +4,7 @@ An application created with [Angular](https://angular.io/) that makes it easy fo
 
 ## Live Demo
 
-You can check it out [HERE](https://claudiobonfati.github.io/money-manager-app/dashboard). The project was created for learning purposes. All the data stored on its database is automatically deleted after two months.
+You can check it out [HERE](https://claudiobonfati.github.io/money-manager-app). The project was created for learning purposes. All the data stored on its database is automatically deleted after two months.
 
 ## Project Screen Shot
 
@@ -26,7 +26,9 @@ To Start Server:
 
 To Visit App:
 
-`localhost:4200`  
+`localhost:4200`
+
+In order to use the API locally you will need to clone the [API repository](https://github.com/claudiobonfati/money-manager-api).
 
 ## Authors
 
