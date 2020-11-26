@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1606416507728,
+  "timestamp": 1606416964092,
   "index": "/money-manager-app/index.html",
   "assetGroups": [
     {
@@ -148,7 +148,7 @@
     "/money-manager-app/icomoon.e861fb2241a3bd606961.woff": "60bce3290307c00f49b63da9b5651e9c372e2c66",
     "/money-manager-app/index.html": "d395bdcbb7b070da1e4005c88c56ec51e17c4f50",
     "/money-manager-app/main.bd07da9def7864ab137f.js": "0082b2442ce7023864d24f8243f00f0cb63f1aba",
-    "/money-manager-app/manifest.webmanifest": "545d33bd34c073cb0c7eb23e8249ce23561776ba",
+    "/money-manager-app/manifest.webmanifest": "50eddf84628ce4256310812ce5df3bd0fcc55931",
     "/money-manager-app/polyfills.a4021de53358bb0fec14.js": "b47435a9ef2a4829f2f9dfd35599bde3614981b1",
     "/money-manager-app/runtime.e227d1a0e31cbccbf8ec.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
     "/money-manager-app/styles.83ab03f894dbe8e704fd.css": "0f7cbe3ae07f03d6e8028a6f18a49922ef730502"
