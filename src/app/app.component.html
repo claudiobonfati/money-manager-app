@@ -1,8 +1,11 @@
 <div class="mm-main-wrapper"
 [ngClass]="{ 'is-mobile': helperService.isMobile() }"
 ontouchstart="" >
+  <a href="#mm-wrapper-inner" id="shortcut-content" class="font-weight-bold" accesskey="3" title="Skip to main">
+    Skip to main
+  </a>
   <div class="disclaimer" [class.active]="disclaimer">
-    <button (click)="callDisclaimer()">
+    <button (click)="callDisclaimer()" aria-label="Help for this page">
       <i-feather name="help-circle"></i-feather>
     </button>
     <div class="alert">
