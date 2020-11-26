@@ -72,7 +72,7 @@
               <div class="w-100" *ngIf="loginMode === 'easy'">
                 <div class="row">
                   <div class="col-4 py-2" *ngFor="let item of passButtons; index as i;">
-                    <a href="javascript:void(0);" (click)="passAdd(item.opt1, item.opt2)" title="1 or 2" class="btn-border-athens-gray app-bg-athens-gray w-100 font-weight-bold app-color-outer-space text-decoration-none">
+                    <a href="javascript:void(0);" (click)="passAdd(item.opt1, item.opt2)" title="{{ item.opt1 }} or {{ item.opt2 }}" class="btn-border-athens-gray app-bg-athens-gray w-100 font-weight-bold app-color-outer-space text-decoration-none">
                       {{ item.opt1 }} or {{ item.opt2 }}
                     </a>
                   </div>
