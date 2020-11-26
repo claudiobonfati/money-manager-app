@@ -221,7 +221,7 @@ export class NewTransactionComponent implements OnInit {
         this.transactionForm.get('recurrence').value === 'every_two_weeks') {
       body.dayDue = this.transactionForm.get('dayDue').value;
     } else if (this.transactionForm.get('recurrence').value === 'once' ||
-        this.transactionForm.get('recurrence').value === 'monthly') {
+      this.transactionForm.get('recurrence').value === 'monthly') {
       let dayDueInput = new Date(this.transactionForm.get('dayDueMonth').value);
       let day = dayDueInput.getDate();
       body.dayDue = day + 1;
@@ -241,7 +241,6 @@ export class NewTransactionComponent implements OnInit {
           });
         }, 1000)
       }, (error: HttpErrorResponse) => {
-        // console.log(error);
         setTimeout(() => {
           this.setBtn('error');
         }, 1000)
