@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1606416964092,
+  "timestamp": 1606591934173,
   "index": "/money-manager-app/index.html",
   "assetGroups": [
     {
@@ -18,7 +18,7 @@
         "/money-manager-app/assets/fonts/icomoon/icomoon.zip",
         "/money-manager-app/assets/fonts/icomoon/style.css",
         "/money-manager-app/index.html",
-        "/money-manager-app/main.bd07da9def7864ab137f.js",
+        "/money-manager-app/main.f24096a332838b6072f2.js",
         "/money-manager-app/manifest.webmanifest",
         "/money-manager-app/polyfills.a4021de53358bb0fec14.js",
         "/money-manager-app/runtime.e227d1a0e31cbccbf8ec.js",
@@ -126,7 +126,7 @@
     "/money-manager-app/assets/images/icons/ms-icon-150x150.png": "cc9b6aaa8e1118180e908dfb23dfd98ba2362a4f",
     "/money-manager-app/assets/images/icons/ms-icon-310x310.png": "802b6e7d51e218caa2d757465f654bf7114610bc",
     "/money-manager-app/assets/images/icons/ms-icon-70x70.png": "25fa76074cc4763fb1586ec1dd457c88adb5a482",
-    "/money-manager-app/assets/images/logo-money-manager.svg": "75b20ab04fda847d04f2fa8ccddc94ef6b23e2dd",
+    "/money-manager-app/assets/images/logo-money-manager.svg": "f6d70ae7b9174a4c5872dbab66a344628b291246",
     "/money-manager-app/assets/images/mascot.svg": "16155ce3ce853b1f9206cb71049d4afef7b6abe0",
     "/money-manager-app/assets/images/og-image.png": "f99251a7e38d5f34f4a66c300960c83183776d30",
     "/money-manager-app/assets/images/rule-x.svg": "6095e9fbe2ecbda0e889249bf9c84277d4802473",
@@ -146,8 +146,8 @@
     "/money-manager-app/icomoon.7c99e9c43e3a5d60254b.svg": "d75576785462751a2c6335b2f9ee89d61058b656",
     "/money-manager-app/icomoon.9d3e11aa46e48339d8cd.eot": "76eb20cd72b0e3196d26c4257e92f357052ef81a",
     "/money-manager-app/icomoon.e861fb2241a3bd606961.woff": "60bce3290307c00f49b63da9b5651e9c372e2c66",
-    "/money-manager-app/index.html": "d395bdcbb7b070da1e4005c88c56ec51e17c4f50",
-    "/money-manager-app/main.bd07da9def7864ab137f.js": "0082b2442ce7023864d24f8243f00f0cb63f1aba",
+    "/money-manager-app/index.html": "a0a8c259774de60ff4e87eba6c9c59719b3214d1",
+    "/money-manager-app/main.f24096a332838b6072f2.js": "da505763c01078efa23cd22b90f8614f69c4232c",
     "/money-manager-app/manifest.webmanifest": "50eddf84628ce4256310812ce5df3bd0fcc55931",
     "/money-manager-app/polyfills.a4021de53358bb0fec14.js": "b47435a9ef2a4829f2f9dfd35599bde3614981b1",
     "/money-manager-app/runtime.e227d1a0e31cbccbf8ec.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
