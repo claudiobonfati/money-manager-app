@@ -33,6 +33,8 @@ export class RegisterComponent implements OnInit {
   private emailErrorMsg: string;
   private nameAnimateShake: boolean = false;
   private emailAnimateShake: boolean = false;
+  public nextBtnStatus: string = '';
+  public doneBtnStatus: string = '';
 
   private passwordForm: FormGroup;
   private passwordSent: boolean = false;
@@ -92,11 +94,44 @@ export class RegisterComponent implements OnInit {
     setTimeout(() => this.inputName.nativeElement.focus());
   }
 
+  setBtn(target: string, status: string) {
+    const tgt = target + 'BtnStatus';
+
+    if (this[tgt] === undefined)
+      return
+
+    switch (status) {
+      case '':
+        this[tgt] = status;
+        break;
+      case 'loading':
+        this[tgt] = status;
+        break;
+      case 'error':
+        this[tgt] = 'feedback-error';
+        setTimeout(() => {
+          this.setBtn(target, '');
+        }, 1000);
+        break;
+      case 'ok':
+        this[tgt] = 'feedback-ok';
+        setTimeout(() => {
+          this.setBtn(target, '');
+        }, 1000);
+        break;
+      default:
+        console.error('Invalid argument for setBtn()');
+    }
+  }
+
   validateRegister() {
     this.registerSent = true;
+    this.setBtn('next', 'loading');
 
-    if (this.registerForm.invalid)
-      return
+    if (this.registerForm.invalid){
+      this.setBtn('next', 'error');
+      return;
+    }
 
     this.httpService.buildUrl('users/presentation')
     .post(this.registerForm.value)
@@ -104,9 +139,13 @@ export class RegisterComponent implements OnInit {
       res => {
         this.emailErrorMsg = 'Email already registered!';
         this.applyShakeAnimation('email');
+        this.setBtn('next', 'error');
       }, (error: HttpErrorResponse) => {
         if (error.status === 404) {
-          this.currentStep = 'password';
+          this.setBtn('next', 'ok');
+          setTimeout(() => {
+            this.currentStep = 'password';
+          }, 1000);
         }
       }
     )
@@ -114,13 +153,17 @@ export class RegisterComponent implements OnInit {
 
   register() {
     this.passwordSent = true;
+    this.setBtn('done', 'loading');
 
-    if (this.passwordForm.invalid)
-      return
+    if (this.passwordForm.invalid) {
+      this.setBtn('done', 'error');
+      return;
+    }
 
     if (this.passwordForm.get('password').value !== this.passwordForm.get('confirm').value) {
       this.applyShakeAnimation('confirm');
       this.confirmErrorMsg = 'Passwords don\'t macth!';
+      this.setBtn('done', 'error');
       return;
     }
 
@@ -133,10 +176,14 @@ export class RegisterComponent implements OnInit {
     this.httpService.buildUrl('users').post(body)
     .subscribe(
       (data: UserModel) => {
-        this.httpService.createLocalUser(data);
-        this.router.navigate(['dashboard']);
+        this.setBtn('done', 'ok');
+        setTimeout(() => {
+          this.httpService.createLocalUser(data);
+          this.router.navigate(['dashboard']);
+        }, 1000);
       }, (error: HttpErrorResponse) => {
-        // console.log(error)
+        this.setBtn('done', 'error');
+
         this.passwordForm.get('password').setValue('');
         this.passwordForm.get('confirm').setValue('');
       }
@@ -147,13 +194,13 @@ export class RegisterComponent implements OnInit {
     const tgt = target + 'AnimateShake';
 
     if (this[tgt] === undefined)
-      return
+      return;
 
     this[tgt] = true;
 
     setTimeout(() => {
       if (this[tgt]) this[tgt] = false;
-    }, 800)
+    }, 800);
   }
 
   onPasswordChange(field: string, val: string): void {

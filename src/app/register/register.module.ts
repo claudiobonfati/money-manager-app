@@ -4,6 +4,14 @@ import { RegisterComponent } from './register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { FeatherModule } from 'angular-feather';
+import { Loader, Check, AlertTriangle } from 'angular-feather/icons';
+
+const icons = {
+  Loader,
+  Check,
+  AlertTriangle
+};
 
 @NgModule({
   declarations: [
@@ -14,6 +22,7 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    FeatherModule.pick(icons),
     RouterModule
   ]
 })

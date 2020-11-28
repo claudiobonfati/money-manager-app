@@ -36,8 +36,20 @@
                   </div>
                 </div>
                 <div class="w-100">
-                  <button class="btn-border-athens-gray w-100 font-weight-bold app-color-athens-gray">
-                    Next
+                  <button class="btn-border-athens-gray btn-loader-effect w-100 font-weight-bold app-color-athens-gray"
+                  [ngClass]="nextBtnStatus">
+                    <span class="btn-loader-text">
+                      Next
+                    </span>
+                    <span class="btn-loader-icon-loading">
+                      <i-feather name="loader"></i-feather>
+                    </span>
+                    <span class="btn-loader-icon-ok">
+                      <i-feather name="check"></i-feather>
+                    </span>
+                    <span class="btn-loader-icon-error">
+                      <i-feather name="alert-triangle"></i-feather>
+                    </span>
                   </button>
                 </div>
               </form>
@@ -74,8 +86,20 @@
                   </div>
                 </div>
                 <div class="w-100">
-                  <button class="btn-border-athens-gray w-100 font-weight-bold app-color-outer-space app-bg-athens-gray">
-                    Done!
+                  <button class="btn-border-athens-gray btn-loader-effect w-100 font-weight-bold app-color-outer-space app-bg-athens-gray"
+                  [ngClass]="doneBtnStatus">
+                    <span class="btn-loader-text">
+                      Done!
+                    </span>
+                    <span class="btn-loader-icon-loading">
+                      <i-feather name="loader"></i-feather>
+                    </span>
+                    <span class="btn-loader-icon-ok">
+                      <i-feather name="check"></i-feather>
+                    </span>
+                    <span class="btn-loader-icon-error">
+                      <i-feather name="alert-triangle"></i-feather>
+                    </span>
                   </button>
                 </div>
               </form>
