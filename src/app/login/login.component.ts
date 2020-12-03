@@ -214,7 +214,7 @@ export class LoginComponent implements OnInit {
 
     this.setBtn('loading');
 
-    if (this.loginMode === 'normal'){
+    if (this.loginMode === 'normal') {
       const email = this.emailForm.controls['email'].value;
       const password = this.passwordForm.controls['password'].value;
 
@@ -235,10 +235,11 @@ export class LoginComponent implements OnInit {
       )
     } else {
       const id = atob(localStorage.getItem('loginEasyId'));
+      const easylogin_token = atob(localStorage.getItem('loginEasyToken'));
       const password = this.password;
 
       this.httpService.buildUrl('users/loginEasy')
-      .post({ _id: id, password })
+      .post({ _id: id, password, easylogin_token })
       .subscribe(
         (data: UserModel) => {
           this.setBtn('ok');
@@ -247,9 +248,18 @@ export class LoginComponent implements OnInit {
             this.httpService.createLocalUser(data);
             this.router.navigate(['dashboard']);
           }, 600);
-        }, (error: HttpErrorResponse) => {
-          this.setBtn('error');
-          this.applyShakeAnimation('password');
+        }, (e: HttpErrorResponse) => {
+          if (e.error || e.error === 'easylogin_expired') {
+            this.setBtn('error');
+            this.applyShakeAnimation('password');
+
+            setTimeout(() => {
+              this.removeCurrentUser();
+            }, 1000)
+          } else {
+            this.setBtn('error');
+            this.applyShakeAnimation('password');
+          }
         }
       )
     }

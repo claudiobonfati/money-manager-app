@@ -29,17 +29,19 @@ export class HttpService {
   }
 
   public createLocalUser(data: UserModel): void {
-    this.saveLocalUser(data.user)
+    this.saveLocalUser(data.user, data.token)
 
     if (data.token)
       localStorage.setItem('token', btoa(data.token));
   }
 
-  public saveLocalUser(user: ProfileModel): void {
+  public saveLocalUser(user: ProfileModel, token?: any): void {
     this.currentUser = user;
     localStorage.setItem('currentUser', btoa(JSON.stringify(user)));
     localStorage.setItem('loginEasyId', btoa(user._id));
     localStorage.setItem('loginEasyName', btoa(user.name));
+    if (token)
+      localStorage.setItem('loginEasyToken', btoa(token));
   }
 
   public getLocalUser(): ProfileModel {
@@ -55,6 +57,7 @@ export class HttpService {
   public clearLoginEasy(): void {
     localStorage.removeItem('loginEasyId');
     localStorage.removeItem('loginEasyName');
+    localStorage.removeItem('loginEasyToken');
   }
 
   private clearLocalUserData(): void {
@@ -62,12 +65,16 @@ export class HttpService {
     localStorage.removeItem('currentUser');
   }
 
-  public logout(): any {
-    this.buildUrl('/users/logout');
-    this.clearLocalUserData();
-
-    // return this.http.post<any>(this.url);
-    this.router.navigate(['/'])
+  public logout(): void {
+    this.buildUrl('users/logout').post().subscribe(
+      (res) => {
+        this.clearLocalUserData();
+        this.router.navigate(['/']);
+      }, (error: HttpErrorResponse) => {
+        this.clearLocalUserData();
+        this.router.navigate(['/']);
+      }
+    );
   }
 
   public getToken(): string {
