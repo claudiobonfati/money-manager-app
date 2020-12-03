@@ -66,7 +66,7 @@ $ ng serve
 
 ## Contributing
 
-You can send how many PR's do you want, I'll be glad to analyse and accept them!
+You can send how many PR's you want, I'll be glad to analyse and accept them!
 
 Connect with me at [LinkedIn](https://www.linkedin.com/in/claudiobonfati/)
 
