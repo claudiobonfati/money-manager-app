@@ -6,7 +6,7 @@ An application created with [Angular](https://angular.io/) that makes it easy fo
 
 ## Screenshots
 
-<img src="src/assets/images/public/images/git-image2.png" width="914">
+<img src="src/assets/images/git-image2.png" width="914">
 
 ## Live Demo
 
