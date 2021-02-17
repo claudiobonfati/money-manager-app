@@ -4,6 +4,10 @@ An application created with [Angular](https://angular.io/) that makes it easy fo
 
 <img src="src/assets/images/git-image.png" width="914">
 
+## Screenshots
+
+<img src="src/assets/images/public/images/git-image2.png" width="914">
+
 ## Live Demo
 
 You can check it live [HERE](https://claudiobonfati.github.io/money-manager-app).
